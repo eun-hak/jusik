@@ -4,6 +4,15 @@ import Ticker from "@/components/Ticker";
 
 const latestArticles: Article[] = [
   {
+    slug: "how-to-get-adsense-approval-seo-guide",
+    title: "구글 애드센스 승인받는 글쓰기 핵심 전략 (SEO 최적화 완벽 가이드)",
+    excerpt: "애드센스 고시를 한 번에 통과하는 비결. 구글 SEO 친화적인 글 구조, 키워드 배치, 가독성 높은 콘텐츠 작성법을 모두 공개합니다.",
+    date: "2024.03.10",
+    category: "분석",
+    readTime: "7분",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+  },
+  {
     slug: "2024-semiconductor-buy-now",
     title: "2024년 반도체 섹터, 지금 매수해도 될까?",
     excerpt:

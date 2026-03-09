@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 import ArticleCard, { Article } from "@/components/ArticleCard";
 
 // Mock articles DB
@@ -7,8 +8,10 @@ const articles: Record<string, {
   slug: string;
   title: string;
   subtitle: string;
+  description: string;
   category: string;
   date: string;
+  publishedTime: string; // ISO String for SEO
   readTime: string;
   author: string;
   imageUrl: string;
@@ -20,8 +23,10 @@ const articles: Record<string, {
     title: "2024년 반도체 섹터, 지금 매수해도 될까?",
     subtitle:
       "AI 수요 폭증으로 반도체 업종이 다시 주목받고 있습니다. 삼성전자, SK하이닉스를 중심으로 밸류에이션과 실적 전망을 짚어봅니다.",
+    description: "2024년 반도체 섹터 전망 분석. AI 열풍에 따른 HBM 수요 증가 여파와 삼성전자, SK하이닉스 밸류에이션 분석 및 투자 전략.",
     category: "분석",
     date: "2024.01.15",
+    publishedTime: "2024-01-15T09:00:00+09:00",
     readTime: "8분",
     author: "주식일기",
     imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80",
@@ -69,6 +74,61 @@ const articles: Record<string, {
       },
     ],
   },
+  "how-to-get-adsense-approval-seo-guide": {
+    slug: "how-to-get-adsense-approval-seo-guide",
+    title: "구글 애드센스 승인받는 글쓰기 핵심 전략 (SEO 최적화 완벽 가이드)",
+    subtitle: "애드센스 고시를 한 번에 통과하는 비결. 구글 SEO 친화적인 글 구조, 키워드 배치, 가독성 높은 콘텐츠 작성법을 모두 공개합니다.",
+    description: "구글 애드센스 한 번에 승인받는 글쓰기 비결! 구글 봇이 좋아하는 SEO 친화적인 문서 구조 설계, H 태그 활용법, 핵심 키워드 배치 전략까지 완벽하게 정리했습니다.",
+    category: "분석",
+    date: "2024.03.10",
+    publishedTime: "2024-03-10T10:00:00+09:00",
+    readTime: "7분",
+    author: "주식일기",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+    tags: ["애드센스", "승인", "SEO", "검색엔진최적화", "블로그"],
+    content: [
+      {
+        type: "p",
+        text: "블로그 수익화의 첫걸음, 바로 '애드센스 승인'입니다. 요즘은 애드센스 자체의 기준이 높아져서 흔히 '애드센스 고시'라고도 부르는데요. 승인을 위해 가장 중요한 것은 '구글이 좋아하는 구조'로 글을 작성하는 것입니다. 이 글에서는 SEO(검색 엔진 최적화) 관점에서 완벽한 글쓰기 구조를 살펴보도록 하겠습니다.",
+      },
+      {
+        type: "h2",
+        text: "1. 구글 봇(Bot)이 이해하기 쉬운 뼈대: H 태그 활용",
+      },
+      {
+        type: "p",
+        text: "구글의 크롤러는 사람처럼 글의 맥락을 이미지만으로 파악하지 못합니다. 대신 HTML 문서의 구조, 특히 헤딩(H 태그)를 통해 이 문서가 어떤 내용을 다루고 있고 무엇이 중요한지 파악합니다.",
+      },
+      {
+        type: "quote",
+        text: "글의 기둥이 되는 H2(대제목), 세부 내용을 다루는 H3(중제목)를 적절한 위계로 사용하는 것이 핵심입니다. 절대 폰트 크기를 키우기 위해 H 태그를 오남용해서는 안 됩니다.",
+      },
+      {
+        type: "h2",
+        text: "2. 본문 분량과 퀄리티 유지",
+      },
+      {
+        type: "p",
+        text: "콘텐츠의 품질(Quality)은 애드센스 승인을 결정짓는 가장 강력한 요소입니다. 의미 없는 단어의 나열이나 다른 블로그의 글을 단순 복사(Ctrl+C, V)하는 것은 오히려 승인 대기 시간만 길어지게 할 뿐입니다.",
+      },
+      {
+        type: "h3",
+        text: "최소 1,500자 이상의 글자 수",
+      },
+      {
+        type: "p",
+        text: "구글은 하나의 문서를 완전한 정보를 담고 있는 백과사전처럼 취급합니다. 방문자가 내 블로그 글 하나만 읽고도 해당 주제에 대한 답을 얻을 수 있어야 합니다. 그 정도의 정보를 담으려면 공백을 제외하고 최소 1,000자에서 1,500자 이상의 본문이 필요합니다.",
+      },
+      {
+        type: "h2",
+        text: "3. 정확한 정보와 체류 시간",
+      },
+      {
+        type: "p",
+        text: "결국 구글 애드센스는 '광고 플랫폼'입니다. 광고주를 위해 체류 시간이 길고 방문자의 집중도가 높은 웹사이트에 광고를 내보내려고 합니다. 글의 문단을 짧게 끊어 읽기 쉽게 만들고, 사용자 경험을 해치지 않게 설계하는 것이 중요합니다.",
+      },
+    ],
+  },
 };
 
 const relatedArticles: Article[] = [
@@ -98,6 +158,50 @@ const relatedArticles: Article[] = [
   },
 ];
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = articles[slug];
+
+  if (!article) {
+    return {
+      title: "글을 찾을 수 없습니다 | 주식일기",
+    };
+  }
+
+  const DOMAIN = "https://yourdomain.com"; // TODO: 실제 도메인으로 교체
+
+  return {
+    title: `${article.title} | 주식일기`,
+    description: article.description,
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      type: "article",
+      publishedTime: article.publishedTime,
+      authors: [article.author],
+      url: `${DOMAIN}/article/${article.slug}`,
+      images: [
+        {
+          url: article.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
+      images: [article.imageUrl],
+    },
+  };
+}
+
 export async function generateStaticParams() {
   return Object.keys(articles).map((slug) => ({ slug }));
 }
@@ -110,8 +214,40 @@ export default async function ArticleDetailPage({
   const { slug } = await params;
   const article = articles[slug] ?? articles["2024-semiconductor-buy-now"];
 
+  const DOMAIN = "https://yourdomain.com";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    image: article.imageUrl,
+    datePublished: article.publishedTime,
+    dateModified: article.publishedTime,
+    author: {
+      "@type": "Person",
+      name: article.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "주식일기",
+      logo: {
+        "@type": "ImageObject",
+        url: `${DOMAIN}/logo.png`, // 로고 경로
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${DOMAIN}/article/${article.slug}`,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Article Header */}
       <section className="bg-white pt-12 pb-8">
         <div className="max-w-[760px] mx-auto px-5 flex flex-col items-center text-center gap-5">
