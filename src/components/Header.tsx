@@ -31,7 +31,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-            <span className="text-white font-heading text-[22px] font-semibold">B</span>
+            <span className="text-white font-heading text-[22px] font-semibold">주</span>
           </div>
           <span className="text-black font-body text-2xl font-medium">주식일기</span>
         </Link>
@@ -66,7 +66,7 @@ export default function Header() {
         {/* Mobile Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-black rounded-md flex items-center justify-center">
-            <span className="text-white font-heading text-lg font-semibold">S</span>
+            <span className="text-white font-heading text-lg font-semibold">주</span>
           </div>
           <span className="text-black font-body text-lg font-medium">주식일기</span>
         </Link>

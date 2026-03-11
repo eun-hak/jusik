@@ -6,3 +6,5 @@ export { default as Badge } from "./Badge";
 export { default as Button } from "./Button";
 export { default as ArticleCard } from "./ArticleCard";
 export type { Article } from "./ArticleCard";
+export { default as NewsletterForm } from "./NewsletterForm";
+export { default as CategoryContent } from "./CategoryContent";

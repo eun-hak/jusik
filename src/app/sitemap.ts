@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/config';
 
-const DOMAIN = 'https://yourdomain.com'; // TODO: 실제 도메인으로 변경
+const DOMAIN = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 실제 환경에서는 DB나 API에서 동적으로 가져와야 합니다.

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import MobileBottomNav from "@/components/MobileBottomNav";
+import ConditionalLayout from "@/components/ConditionalLayout";
 import Script from "next/script";
+import { SITE_URL } from "@/lib/config";
 
 const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-heading",
@@ -21,6 +20,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "주식일기 | 주식 투자의 모든 것",
   description: "시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한 인사이트를 전합니다.",
   openGraph: {
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     title: "주식일기 | 주식 투자의 모든 것",
     description: "시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한 인사이트를 전합니다.",
   },
-  verification: {
-    google: "YOUR_GOOGLE_SITE_VERIFICATION", // 구글 서치콘솔 소유권 확인 태그
-  },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  }),
 };
 
 export default function RootLayout({
@@ -48,23 +48,20 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
       </head>
       <body
         className={`${cormorantGaramond.variable} ${outfit.variable} antialiased`}
       >
         <a href="#main-content" className="skip-link">본문으로 바로가기</a>
-        <Header />
-        <main id="main-content" className="min-h-screen pb-20 md:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <MobileBottomNav />
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   );

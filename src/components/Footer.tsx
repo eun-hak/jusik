@@ -3,6 +3,7 @@ import Link from "next/link";
 interface FooterLink {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 interface FooterColumn {
@@ -14,22 +15,33 @@ const footerColumns: FooterColumn[] = [
   {
     title: "탐색",
     links: [
-      { label: "최신 글", href: "/" },
-      { label: "인기 글", href: "/popular" },
-      { label: "아카이브", href: "/archive" },
+      { label: "홈", href: "/" },
+      { label: "시장 분석", href: "/category/analysis" },
+      { label: "종목", href: "/category/stocks" },
+      { label: "투자노트", href: "/category/notes" },
+      { label: "시장동향", href: "/category/market" },
+    ],
+  },
+  {
+    title: "더보기",
+    links: [
+      { label: "소개", href: "/about" },
+      { label: "뉴스레터", href: "/newsletter" },
+      { label: "카테고리", href: "/category" },
     ],
   },
   {
     title: "소셜",
     links: [
-      { label: "트위터", href: "https://twitter.com" },
-      { label: "유튜브", href: "https://youtube.com" },
-      { label: "RSS 피드", href: "/rss" },
+      { label: "트위터 (X)", href: "https://twitter.com", external: true },
+      { label: "유튜브", href: "https://youtube.com", external: true },
     ],
   },
 ];
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-black text-white w-full">
       <div className="px-5 md:px-[120px] py-16 md:py-20">
@@ -39,7 +51,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5 max-w-[300px]">
             <Link href="/" className="flex items-center gap-3">
               <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
-                <span className="text-black font-heading text-base font-semibold">B</span>
+                <span className="text-black font-heading text-base font-semibold">주</span>
               </div>
               <span className="text-white font-heading text-xl font-medium">주식일기</span>
             </Link>
@@ -49,17 +61,20 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex gap-16 md:gap-20">
+          <div className="flex gap-12 md:gap-16">
             {footerColumns.map((column) => (
               <div key={column.title} className="flex flex-col gap-4">
                 <h4 className="text-white font-body text-[11px] font-semibold tracking-[1.5px]">
-                  {column.title}
+                  {column.title.toUpperCase()}
                 </h4>
                 <div className="flex flex-col gap-4">
                   {column.links.map((link) => (
                     <Link
                       key={link.label}
                       href={link.href}
+                      {...(link.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                       className="text-gray-500 font-body text-sm hover:text-gray-300 transition-colors"
                     >
                       {link.label}
@@ -72,9 +87,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 mt-12 md:mt-16 pt-6 border-t border-gray-700">
+        <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 mt-12 md:mt-16 pt-6 border-t border-gray-800">
           <p className="text-gray-600 font-body text-xs">
-            © 2024 주식일기. 모든 권리 보유.
+            © {year} 주식일기. 모든 권리 보유.
           </p>
           <div className="flex gap-6">
             <Link

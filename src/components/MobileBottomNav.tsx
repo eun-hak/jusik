@@ -12,7 +12,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { icon: <Home size={22} />, label: "홈", href: "/" },
-  { icon: <LayoutGrid size={22} />, label: "분류", href: "/category" },
+  { icon: <LayoutGrid size={22} />, label: "카테고리", href: "/category" },
   { icon: <Search size={22} />, label: "검색", href: "/search" },
   { icon: <User size={22} />, label: "소개", href: "/about" },
   { icon: <Mail size={22} />, label: "구독", href: "/newsletter" },

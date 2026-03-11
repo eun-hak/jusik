@@ -1,48 +1,10 @@
 import Link from "next/link";
-import ArticleCard, { Article } from "@/components/ArticleCard";
+import ArticleCard from "@/components/ArticleCard";
 import Ticker from "@/components/Ticker";
+import NewsletterForm from "@/components/NewsletterForm";
+import { getArticles } from "@/lib/db/articles";
 
-const latestArticles: Article[] = [
-  {
-    slug: "how-to-get-adsense-approval-seo-guide",
-    title: "구글 애드센스 승인받는 글쓰기 핵심 전략 (SEO 최적화 완벽 가이드)",
-    excerpt: "애드센스 고시를 한 번에 통과하는 비결. 구글 SEO 친화적인 글 구조, 키워드 배치, 가독성 높은 콘텐츠 작성법을 모두 공개합니다.",
-    date: "2024.03.10",
-    category: "분석",
-    readTime: "7분",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
-  },
-  {
-    slug: "2024-semiconductor-buy-now",
-    title: "2024년 반도체 섹터, 지금 매수해도 될까?",
-    excerpt:
-      "AI 수요 폭증으로 반도체 업종이 다시 주목받고 있습니다. 삼성전자, SK하이닉스를 중심으로 밸류에이션과 실적 전망을 짚어봅니다.",
-    date: "2024.01.15",
-    category: "분석",
-    readTime: "8분",
-    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
-  },
-  {
-    slug: "samsung-vs-tsmc-dividend",
-    title: "삼성전자 vs TSMC, 반도체 패권 전쟁의 승자는?",
-    excerpt:
-      "파운드리 시장의 양강 구도가 굳어지는 가운데, 두 기업의 기술력·수익성·주주환원 정책을 비교 분석합니다.",
-    date: "2024.01.12",
-    category: "종목",
-    readTime: "12분",
-    imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80",
-  },
-  {
-    slug: "individual-investor-etf-portfolio",
-    title: "초보 투자자를 위한 ETF 포트폴리오 구성법",
-    excerpt:
-      "변동성이 큰 시장에서 ETF로 분산 투자하는 방법을 단계별로 설명합니다. 국내·해외 ETF 비중 설정부터 리밸런싱까지.",
-    date: "2024.01.10",
-    category: "투자노트",
-    readTime: "10분",
-    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80",
-  },
-];
+export const dynamic = "force-dynamic";
 
 const popularArticles = [
   { slug: "kospi-2500-outlook", title: "KOSPI 2500 돌파, 지속 가능할까?" },
@@ -65,6 +27,17 @@ const tags = [
 ];
 
 export default function HomePage() {
+  const published = getArticles({ status: "published" });
+  const latestArticles = published.slice(0, 4).map((a) => ({
+    slug: a.slug,
+    title: a.title,
+    excerpt: a.subtitle,
+    date: a.date,
+    category: a.category,
+    readTime: a.readTime,
+    imageUrl: a.imageUrl,
+  }));
+
   return (
     <>
       {/* Ticker */}
@@ -114,20 +87,26 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Mobile: featured + compact */}
-            <div className="md:hidden flex flex-col gap-4">
-              <ArticleCard article={latestArticles[0]} variant="featured" />
-              {latestArticles.slice(1).map((article) => (
-                <ArticleCard key={article.slug} article={article} variant="compact" />
-              ))}
-            </div>
+            {latestArticles.length === 0 ? (
+              <p className="font-body text-sm text-gray-400 py-8">아직 발행된 글이 없습니다.</p>
+            ) : (
+              <>
+                {/* Mobile: featured + compact */}
+                <div className="md:hidden flex flex-col gap-4">
+                  <ArticleCard article={latestArticles[0]} variant="featured" />
+                  {latestArticles.slice(1).map((article) => (
+                    <ArticleCard key={article.slug} article={article} variant="compact" />
+                  ))}
+                </div>
 
-            {/* Desktop: list */}
-            <div className="hidden md:block">
-              {latestArticles.map((article) => (
-                <ArticleCard key={article.slug} article={article} variant="list" />
-              ))}
-            </div>
+                {/* Desktop: list */}
+                <div className="hidden md:block">
+                  {latestArticles.map((article) => (
+                    <ArticleCard key={article.slug} article={article} variant="list" />
+                  ))}
+                </div>
+              </>
+            )}
 
             <div className="hidden md:block mt-6 pt-6 border-t border-gray-200">
               <Link href="/category/analysis" className="btn-secondary font-body text-sm px-6 py-3 rounded-md">
@@ -195,16 +174,7 @@ export default function HomePage() {
               <p className="font-body text-sm text-white/70 leading-relaxed">
                 주요 시장 동향과 핵심 종목 분석을 이메일로 전달해 드립니다.
               </p>
-              <div className="flex flex-col gap-2 mt-1">
-                <input
-                  type="email"
-                  placeholder="이메일 주소"
-                  className="w-full bg-white/10 border border-white/20 rounded-md px-4 py-2.5 font-body text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-white/50"
-                />
-                <button className="w-full bg-white text-burgundy font-body text-sm font-semibold py-2.5 rounded-md hover:bg-gray-100 transition-colors">
-                  구독하기
-                </button>
-              </div>
+              <NewsletterForm variant="dark" />
             </div>
 
             {/* Tags */}

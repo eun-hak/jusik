@@ -1,4 +1,11 @@
 import { TrendingUp, Search, BarChart3 } from "lucide-react";
+import { Metadata } from "next";
+import NewsletterForm from "@/components/NewsletterForm";
+
+export const metadata: Metadata = {
+  title: "뉴스레터 | 주식일기",
+  description: "매주 월요일, 주요 시장 동향과 핵심 종목 분석을 이메일로 받아보세요.",
+};
 
 const benefits = [
   {
@@ -42,25 +49,11 @@ export default function NewsletterPage() {
                 매주 월요일,<br />한 주의 시장을<br />먼저 읽으세요
               </h1>
               <p className="font-body text-[15px] text-gray-600 leading-relaxed max-w-md">
-                2,600명의 투자자가 구독 중인 주식일기 뉴스레터입니다. 매주 월요일 아침, 한 주 시장의 핵심 변수와 주목할 종목을 정리해 드립니다.
+                2,600명의 투자자가 구독 중인 주식일기 뉴스레터입니다. 매주 월요일 아침, 한 주
+                시장의 핵심 변수와 주목할 종목을 정리해 드립니다.
               </p>
 
-              {/* Email Form */}
-              <div className="flex flex-col gap-3 max-w-md">
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    placeholder="이메일 주소"
-                    className="flex-1 border border-gray-200 rounded-md px-4 py-3 font-body text-sm focus:outline-none focus:border-black transition-colors"
-                  />
-                  <button className="btn-primary font-body text-sm px-5 py-3 rounded-md flex-shrink-0">
-                    구독하기
-                  </button>
-                </div>
-                <p className="font-body text-xs text-gray-400">
-                  언제든 구독 취소 가능합니다. 스팸 없음.
-                </p>
-              </div>
+              <NewsletterForm variant="default" />
             </div>
 
             {/* Right: Preview Card */}
@@ -133,16 +126,7 @@ export default function NewsletterPage() {
 
           {/* Bottom CTA */}
           <div className="flex flex-col items-center gap-4 mt-4">
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="이메일 주소"
-                className="w-64 bg-white/10 border border-white/20 rounded-md px-4 py-3 font-body text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-white/50 transition-colors"
-              />
-              <button className="bg-white text-black font-body text-sm font-semibold px-5 py-3 rounded-md hover:bg-gray-100 transition-colors">
-                무료 구독
-              </button>
-            </div>
+            <NewsletterForm variant="default" />
             <p className="font-body text-xs text-gray-600">이미 2,600명이 읽고 있어요</p>
           </div>
         </div>
