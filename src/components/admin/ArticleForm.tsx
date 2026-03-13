@@ -35,7 +35,8 @@ interface Props {
 
 export default function ArticleForm({ initial }: Props) {
   const router = useRouter();
-  const isEdit = !!initial;
+  // AI 생성 글은 id가 비어 있으므로 새 글로 POST
+  const isEdit = !!(initial?.id);
 
   const [title, setTitle] = useState(initial?.title ?? "");
   const [subtitle, setSubtitle] = useState(initial?.subtitle ?? "");

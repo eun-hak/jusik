@@ -1,4 +1,4 @@
-import db from "./mock";
+import { readDb, writeDb } from "./mock";
 import type { Article, ArticleInput, ArticleUpdate } from "./types";
 
 function newId(): string {
@@ -6,6 +6,7 @@ function newId(): string {
 }
 
 export function getArticles(opts?: { status?: "draft" | "published" }): Article[] {
+  const db = readDb();
   const all = Array.from(db.values()).sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
@@ -14,10 +15,12 @@ export function getArticles(opts?: { status?: "draft" | "published" }): Article[
 }
 
 export function getArticleById(id: string): Article | null {
+  const db = readDb();
   return db.get(id) ?? null;
 }
 
 export function getArticleBySlug(slug: string): Article | null {
+  const db = readDb();
   for (const a of db.values()) {
     if (a.slug === slug) return a;
   }
@@ -25,6 +28,7 @@ export function getArticleBySlug(slug: string): Article | null {
 }
 
 export function createArticle(input: ArticleInput): Article {
+  const db = readDb();
   const now = new Date().toISOString();
   const article: Article = {
     ...input,
@@ -33,10 +37,12 @@ export function createArticle(input: ArticleInput): Article {
     updatedAt: now,
   };
   db.set(article.id, article);
+  writeDb(db);
   return article;
 }
 
 export function updateArticle(id: string, update: ArticleUpdate): Article | null {
+  const db = readDb();
   const existing = db.get(id);
   if (!existing) return null;
   const updated: Article = {
@@ -47,15 +53,19 @@ export function updateArticle(id: string, update: ArticleUpdate): Article | null
     updatedAt: new Date().toISOString(),
   };
   db.set(id, updated);
+  writeDb(db);
   return updated;
 }
 
 export function deleteArticle(id: string): boolean {
-  return db.delete(id);
+  const db = readDb();
+  const deleted = db.delete(id);
+  if (deleted) writeDb(db);
+  return deleted;
 }
 
 export function getStats() {
-  const all = Array.from(db.values());
+  const all = getArticles();
   return {
     total: all.length,
     published: all.filter((a) => a.status === "published").length,

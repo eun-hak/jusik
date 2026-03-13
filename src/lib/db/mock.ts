@@ -1,4 +1,8 @@
+import fs from "fs";
+import path from "path";
 import type { Article } from "./types";
+
+const DB_FILE = path.join(process.cwd(), ".mock-db.json");
 
 const seed: Article[] = [
   {
@@ -119,17 +123,24 @@ const seed: Article[] = [
   },
 ];
 
-// HMR(핫 리로드) 시 데이터 유지를 위해 globalThis 사용
-declare global {
-  // eslint-disable-next-line no-var
-  var __articlesDb: Map<string, Article> | undefined;
+export function readDb(): Map<string, Article> {
+  try {
+    if (fs.existsSync(DB_FILE)) {
+      const raw = fs.readFileSync(DB_FILE, "utf-8");
+      const obj = JSON.parse(raw) as Record<string, Article>;
+      return new Map(Object.entries(obj));
+    }
+  } catch {
+    // 파일 손상 시 초기화
+  }
+  // 최초 실행: 시드 데이터 기록
+  const map = new Map<string, Article>();
+  seed.forEach((a) => map.set(a.id, a));
+  writeDb(map);
+  return map;
 }
 
-const db: Map<string, Article> = globalThis.__articlesDb ?? new Map();
-
-if (!globalThis.__articlesDb) {
-  globalThis.__articlesDb = db;
-  seed.forEach((a) => db.set(a.id, a));
+export function writeDb(map: Map<string, Article>): void {
+  const obj = Object.fromEntries(map);
+  fs.writeFileSync(DB_FILE, JSON.stringify(obj, null, 2), "utf-8");
 }
-
-export default db;

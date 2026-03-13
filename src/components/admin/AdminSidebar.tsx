@@ -18,6 +18,15 @@ const navItems = [
     exact: true,
   },
   {
+    href: "/admin/generate",
+    label: "AI 글 생성",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1l1.8 4.2L14 8l-4.2 1.8L8 14l-1.8-4.2L2 8l4.2-1.8L8 1z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
     href: "/admin/articles",
     label: "글 관리",
     icon: (
@@ -28,7 +37,7 @@ const navItems = [
   },
   {
     href: "/admin/articles/new",
-    label: "새 글 쓰기",
+    label: "직접 글 쓰기",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
