@@ -202,22 +202,21 @@ export default async function ArticleDetailPage({
 
               {/* Table of Contents */}
               <div>
-                <h3 className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-gray-500 mb-4">
+                <h3 className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-gray-500 mb-3">
                   목차
                 </h3>
-                <ol className="flex flex-col gap-2.5">
+                <ol className="flex flex-col gap-1.5">
                   {article.content
-                    .filter((b) => b.type === "h2" || b.type === "h3")
-                    .map((b, i) => (
-                      <li key={b.id} className="flex items-start gap-2.5">
-                        <span className="font-body text-xs text-gray-400 mt-0.5 flex-shrink-0">
+                    .map((b, idx) => ({ b, sectionIdx: headingIndexes[idx] }))
+                    .filter(({ b }) => b.type === "h2")
+                    .map(({ b, sectionIdx }, i) => (
+                      <li key={b.id} className="flex items-start gap-2">
+                        <span className="font-body text-[11px] text-gray-400 mt-0.5 flex-shrink-0 tabular-nums">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <a
-                          href={`#section-${i}`}
-                          className={`font-body text-sm leading-snug hover:text-black transition-colors ${
-                            b.type === "h3" ? "text-gray-500 pl-2" : "text-gray-700"
-                          }`}
+                          href={`#section-${sectionIdx}`}
+                          className="font-body text-xs text-gray-600 leading-snug hover:text-black transition-colors line-clamp-2"
                         >
                           {b.text}
                         </a>
