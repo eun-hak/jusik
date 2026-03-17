@@ -25,7 +25,7 @@
 *.pem
 
 # mock DB (개발용 임시 파일)
-.mock-db.json
+# .mock-db.json
 
 # debug
 npm-debug.log*

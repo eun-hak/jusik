@@ -1,0 +1,24 @@
+---
+description: 목업 DB(mock.ts)와 seed, .mock-db.json 연동 방식
+globs: src/lib/db/**/*.ts
+alwaysApply: false
+---
+
+# 목업 DB 연동 규칙
+
+## 구조
+
+- **`.mock-db.json`**: 메인 DB. 관리자 페이지에서 작성/수정/삭제한 글이 여기 저장됨 (현재 프로덕션 DB로 사용)
+- **`seed`** (mock.ts): 하드코딩된 초기 데이터. IDE에서 직접 추가 가능
+
+## 연동 방식
+
+1. **IDE에서 글 추가**: `mock.ts`의 `seed` 배열에 새 `Article` 객체를 추가하면 → `readDb()` 호출 시 자동 병합되어 관리자/리스트에 표시됨
+2. **관리자 페이지**: 작성/수정/삭제한 글은 `.mock-db.json`에 저장됨
+3. **병합 로직**: `seed`에 있는 `id`가 `.mock-db.json`에 없으면 병합. seed는 "추가 소스" 역할만 함 (기존 DB 데이터 덮어쓰지 않음)
+4. **삭제 유지**: 관리자에서 seed 글을 삭제하면 `_meta.deletedSeedIds`에 기록됨. 해당 id는 seed에 있어도 다시 병합되지 않음 (mock.ts는 수정하지 않음)
+
+## 수정 시 유의사항
+
+- `readDb()`에서 seed 병합 로직을 제거하거나 변경하면 IDE 추가 글이 반영되지 않음
+- 새 글 추가 시 `id`가 기존 DB와 겹치지 않도록 해야 함

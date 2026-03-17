@@ -1,4 +1,4 @@
-import { readDb, writeDb } from "./mock";
+import { getSeedIds, readDb, writeDb } from "./mock";
 import type { Article, ArticleInput, ArticleUpdate } from "./types";
 
 function newId(): string {
@@ -60,8 +60,20 @@ export function updateArticle(id: string, update: ArticleUpdate): Article | null
 export function deleteArticle(id: string): boolean {
   const db = readDb();
   const deleted = db.delete(id);
-  if (deleted) writeDb(db);
+  if (deleted) {
+    const addDeleted = getSeedIds().has(id) ? [id] : undefined;
+    writeDb(db, addDeleted);
+  }
   return deleted;
+}
+
+export function getTags(): string[] {
+  const articles = getArticles({ status: "published" });
+  const tagSet = new Set<string>();
+  for (const a of articles) {
+    (a.tags ?? []).forEach((t) => tagSet.add(t));
+  }
+  return Array.from(tagSet).sort();
 }
 
 export function getStats() {

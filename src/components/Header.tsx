@@ -12,9 +12,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "홈", href: "/" },
-  { label: "분석", href: "/category/analysis" },
-  { label: "종목", href: "/category/stocks" },
-  { label: "투자노트", href: "/category/notes" },
+  { label: "최신글", href: "/articles" },
 ];
 
 export default function Header() {

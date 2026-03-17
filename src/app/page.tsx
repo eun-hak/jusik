@@ -1,33 +1,14 @@
 import Link from "next/link";
 import ArticleCard from "@/components/ArticleCard";
 import Ticker from "@/components/Ticker";
-import NewsletterForm from "@/components/NewsletterForm";
+// import NewsletterForm from "@/components/NewsletterForm"; // 구독 기능 일단 비활성화
 import { getArticles } from "@/lib/db/articles";
 
 export const dynamic = "force-dynamic";
 
-const popularArticles = [
-  { slug: "kospi-2500-outlook", title: "KOSPI 2500 돌파, 지속 가능할까?" },
-  { slug: "warren-buffett-2024", title: "버핏이 2024년 담은 종목 분석" },
-  { slug: "us-rate-cut-impact", title: "미국 금리 인하가 국내 주식에 미치는 영향" },
-  { slug: "secondary-battery-stocks", title: "2차전지 섹터 하락, 저가 매수 타이밍은?" },
-  { slug: "dividend-strategy-2024", title: "배당주 투자 전략: 연 5% 수익 만들기" },
-];
-
-const categories = [
-  { name: "분석", href: "/category/analysis", count: 24 },
-  { name: "종목", href: "/category/stocks", count: 18 },
-  { name: "투자노트", href: "/category/notes", count: 31 },
-  { name: "시장동향", href: "/category/market", count: 12 },
-];
-
-const tags = [
-  "ETF", "삼성전자", "반도체", "배당", "미국주식",
-  "포트폴리오", "KOSPI", "금리", "가치투자", "성장주",
-];
-
 export default function HomePage() {
   const published = getArticles({ status: "published" });
+
   const latestArticles = published.slice(0, 4).map((a) => ({
     slug: a.slug,
     title: a.title,
@@ -36,6 +17,12 @@ export default function HomePage() {
     category: a.category,
     readTime: a.readTime,
     imageUrl: a.imageUrl,
+  }));
+
+  // 최신 5개를 인기글로 표시 (조회수 없으므로 최신순)
+  const recentArticles = published.slice(0, 5).map((a) => ({
+    slug: a.slug,
+    title: a.title,
   }));
 
   return (
@@ -57,17 +44,19 @@ export default function HomePage() {
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Link
-              href="/category/analysis"
+              href="/articles"
               className="btn-primary font-body text-sm px-6 py-3 rounded-md"
             >
               최신글 보기
             </Link>
+            {/* 구독 기능 일단 비활성화
             <Link
               href="/newsletter"
               className="btn-secondary font-body text-sm px-6 py-3 rounded-md"
             >
               뉴스레터 구독
             </Link>
+            */}
           </div>
         </div>
       </section>
@@ -82,7 +71,7 @@ export default function HomePage() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-heading text-2xl font-medium text-black">최신 글</h2>
-              <Link href="/category/analysis" className="font-body text-sm text-gray-500 hover:text-black transition-colors md:hidden">
+              <Link href="/articles" className="font-body text-sm text-gray-500 hover:text-black transition-colors md:hidden">
                 전체 보기 →
               </Link>
             </div>
@@ -109,7 +98,7 @@ export default function HomePage() {
             )}
 
             <div className="hidden md:block mt-6 pt-6 border-t border-gray-200">
-              <Link href="/category/analysis" className="btn-secondary font-body text-sm px-6 py-3 rounded-md">
+              <Link href="/articles" className="btn-secondary font-body text-sm px-6 py-3 rounded-md">
                 더보기
               </Link>
             </div>
@@ -118,55 +107,30 @@ export default function HomePage() {
           {/* Sidebar */}
           <aside className="w-full lg:w-[300px] flex-shrink-0 flex flex-col gap-10">
 
-            {/* Popular Articles */}
-            <div>
-              <h3 className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-gray-500 mb-5">
-                인기 글
-              </h3>
-              <ol className="flex flex-col gap-4">
-                {popularArticles.map((article, i) => (
-                  <li key={article.slug}>
-                    <Link href={`/article/${article.slug}`} className="flex items-start gap-4 group">
-                      <span className="font-heading text-2xl font-medium text-gray-200 leading-none w-7 flex-shrink-0">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="font-body text-sm text-gray-700 leading-snug group-hover:text-black transition-colors">
-                        {article.title}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-            </div>
+            {/* Recent Articles */}
+            {recentArticles.length > 0 && (
+              <div>
+                <h3 className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-gray-500 mb-5">
+                  최근 글
+                </h3>
+                <ol className="flex flex-col gap-4">
+                  {recentArticles.map((article, i) => (
+                    <li key={article.slug}>
+                      <Link href={`/article/${article.slug}`} className="flex items-start gap-4 group">
+                        <span className="font-heading text-2xl font-medium text-gray-200 leading-none w-7 flex-shrink-0">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="font-body text-sm text-gray-700 leading-snug group-hover:text-black transition-colors">
+                          {article.title}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
 
-            {/* Categories */}
-            <div>
-              <h3 className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-gray-500 mb-5">
-                카테고리
-              </h3>
-              <ul className="flex flex-col">
-                {categories.map((cat) => (
-                  <li key={cat.name}>
-                    <Link
-                      href={cat.href}
-                      className="flex items-center justify-between py-3 border-b border-gray-100 group"
-                    >
-                      <span className="font-body text-sm text-gray-700 group-hover:text-black transition-colors">
-                        {cat.name}
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <span className="font-body text-xs text-gray-400">{cat.count}</span>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-300">
-                          <path d="M5.5 3.5L8.5 7L5.5 10.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Newsletter Signup */}
+            {/* 구독 기능 일단 비활성화
             <div className="bg-burgundy rounded-xl p-6 flex flex-col gap-4">
               <h3 className="font-heading text-xl font-medium text-white leading-snug">
                 매일 아침 인사이트를 받아보세요
@@ -176,24 +140,8 @@ export default function HomePage() {
               </p>
               <NewsletterForm variant="dark" />
             </div>
+            */}
 
-            {/* Tags */}
-            <div>
-              <h3 className="font-body text-[11px] font-semibold tracking-[1.5px] uppercase text-gray-500 mb-4">
-                태그
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <Link
-                    key={tag}
-                    href={`/search?q=${encodeURIComponent(tag)}`}
-                    className="font-body text-xs text-gray-600 border border-gray-200 rounded-full px-3 py-1.5 hover:border-gray-400 hover:text-black transition-colors"
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-            </div>
           </aside>
         </div>
       </section>

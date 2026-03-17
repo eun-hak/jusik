@@ -16,27 +16,25 @@ const footerColumns: FooterColumn[] = [
     title: "탐색",
     links: [
       { label: "홈", href: "/" },
-      { label: "시장 분석", href: "/category/analysis" },
-      { label: "종목", href: "/category/stocks" },
-      { label: "투자노트", href: "/category/notes" },
-      { label: "시장동향", href: "/category/market" },
+      { label: "최신글", href: "/articles" },
+      { label: "검색", href: "/search" },
     ],
   },
   {
     title: "더보기",
     links: [
       { label: "소개", href: "/about" },
-      { label: "뉴스레터", href: "/newsletter" },
-      { label: "카테고리", href: "/category" },
+      // { label: "뉴스레터", href: "/newsletter" }, // 구독 기능 일단 비활성화
     ],
   },
-  {
-    title: "소셜",
-    links: [
-      { label: "트위터 (X)", href: "https://twitter.com", external: true },
-      { label: "유튜브", href: "https://youtube.com", external: true },
-    ],
-  },
+  // 트위터, 유튜브 일단 비활성화
+  // {
+  //   title: "소셜",
+  //   links: [
+  //     { label: "트위터 (X)", href: "https://twitter.com", external: true },
+  //     { label: "유튜브", href: "https://youtube.com", external: true },
+  //   ],
+  // },
 ];
 
 export default function Footer() {

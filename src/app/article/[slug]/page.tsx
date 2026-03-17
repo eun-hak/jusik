@@ -225,7 +225,7 @@ export default async function ArticleDetailPage({
                 </ol>
               </div>
 
-              {/* Newsletter CTA */}
+              {/* 구독 기능 일단 비활성화
               <div className="bg-gray-50 rounded-xl p-5 flex flex-col gap-3 border border-gray-100">
                 <p className="font-heading text-base font-medium text-black leading-snug">
                   매주 이런 분석을 받아보세요
@@ -240,6 +240,7 @@ export default async function ArticleDetailPage({
                   무료 구독하기
                 </Link>
               </div>
+              */}
             </div>
           </aside>
         </div>

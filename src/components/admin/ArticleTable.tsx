@@ -14,7 +14,7 @@ export default function ArticleTable({ articles }: Props) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   async function handleDelete(id: string, title: string) {
-    if (!confirm(`"${title}" 글을 삭제할까요?`)) return;
+    if (!confirm(`"${title}" 글을 삭제할까요?\n삭제된 글은 복구할 수 없습니다.`)) return;
     setDeletingId(id);
     try {
       await fetch(`/api/admin/articles/${id}`, { method: "DELETE" });
@@ -98,8 +98,13 @@ export default function ArticleTable({ articles }: Props) {
                   <button
                     onClick={() => handleDelete(article.id, article.title)}
                     disabled={deletingId === article.id}
-                    className="font-body text-xs text-red-400 hover:text-red-600 transition-colors disabled:opacity-40"
+                    className="font-body text-xs text-red-500 hover:text-red-600 hover:underline transition-colors disabled:opacity-40 flex items-center gap-1"
+                    title="글 삭제"
                   >
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="flex-shrink-0">
+                      <path d="M3 4h10v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+                      <path d="M2 4h12M6 4V2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2M6 7v4M8 7v4M10 7v4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                     {deletingId === article.id ? "삭제 중..." : "삭제"}
                   </button>
                 </div>

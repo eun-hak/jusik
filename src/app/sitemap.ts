@@ -35,12 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
-    {
-      url: `${DOMAIN}/newsletter`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
+    // 구독 기능 일단 비활성화
+    // {
+    //   url: `${DOMAIN}/newsletter`,
+    //   lastModified: new Date(),
+    //   changeFrequency: 'monthly',
+    //   priority: 0.6,
+    // },
     ...categoryUrls,
     ...articleUrls,
   ];

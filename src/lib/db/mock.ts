@@ -2,7 +2,29 @@ import fs from "fs";
 import path from "path";
 import type { Article } from "./types";
 
+const META_KEY = "_meta";
+
+interface DbMeta {
+  deletedSeedIds?: string[];
+}
+
+/**
+ * 목업 DB (JSON 파일 기반)
+ *
+ * - .mock-db.json: 실제 저장소 (관리자에서 작성/수정/삭제한 글이 여기 저장됨)
+ * - seed: mock.ts에 하드코딩된 초기 데이터
+ *
+ * 연동 방식:
+ * 1. IDE에서 mock.ts의 seed 배열에 새 글을 추가하면 → 다음 요청 시 자동 병합되어 관리자/리스트에 표시됨
+ * 2. 관리자 페이지에서 작성/수정/삭제한 글은 .mock-db.json에 저장됨
+ * 3. seed에 있는 id가 .mock-db.json에 없으면 병합 (seed는 "추가 소스" 역할)
+ * 4. 관리자에서 seed 글을 삭제하면 deletedSeedIds에 기록 → seed에 있어도 다시 병합되지 않음 (삭제 유지)
+ */
 const DB_FILE = path.join(process.cwd(), ".mock-db.json");
+
+export function getSeedIds(): Set<string> {
+  return new Set(seed.map((a) => a.id));
+}
 
 const seed: Article[] = [
   {
@@ -296,23 +318,65 @@ const seed: Article[] = [
 ];
 
 export function readDb(): Map<string, Article> {
+  let map = new Map<string, Article>();
+  let meta: DbMeta = {};
+
   try {
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, "utf-8");
-      const obj = JSON.parse(raw) as Record<string, Article>;
-      return new Map(Object.entries(obj));
+      const obj = JSON.parse(raw) as Record<string, unknown>;
+      meta = (obj[META_KEY] as DbMeta) ?? {};
+      const deletedIds = new Set(meta.deletedSeedIds ?? []);
+      for (const [k, v] of Object.entries(obj)) {
+        if (k === META_KEY || !v || typeof v !== "object") continue;
+        map.set(k, v as Article);
+      }
     }
   } catch {
     // 파일 손상 시 초기화
   }
-  // 최초 실행: 시드 데이터 기록
-  const map = new Map<string, Article>();
-  seed.forEach((a) => map.set(a.id, a));
-  writeDb(map);
+
+  const deletedIds = new Set(meta.deletedSeedIds ?? []);
+
+  // seed에 있지만 map에 없고, 삭제 목록에 없는 글만 병합
+  let merged = false;
+  for (const article of seed) {
+    if (deletedIds.has(article.id)) continue;
+    if (!map.has(article.id)) {
+      map.set(article.id, article);
+      merged = true;
+    }
+  }
+
+  // 최초 실행: 파일이 없었으면 시드 저장
+  if (!fs.existsSync(DB_FILE)) {
+    writeDb(map);
+  } else if (merged) {
+    writeDb(map);
+  }
+
   return map;
 }
 
-export function writeDb(map: Map<string, Article>): void {
-  const obj = Object.fromEntries(map);
+export function writeDb(
+  map: Map<string, Article>,
+  addDeletedSeedIds?: string[]
+): void {
+  let meta: DbMeta = {};
+  try {
+    if (fs.existsSync(DB_FILE)) {
+      const raw = fs.readFileSync(DB_FILE, "utf-8");
+      const obj = JSON.parse(raw) as Record<string, unknown>;
+      meta = (obj[META_KEY] as DbMeta) ?? {};
+    }
+  } catch {
+    // 무시
+  }
+  if (addDeletedSeedIds?.length) {
+    const set = new Set(meta.deletedSeedIds ?? []);
+    addDeletedSeedIds.forEach((id) => set.add(id));
+    meta = { ...meta, deletedSeedIds: Array.from(set) };
+  }
+  const obj: Record<string, unknown> = { [META_KEY]: meta, ...Object.fromEntries(map) };
   fs.writeFileSync(DB_FILE, JSON.stringify(obj, null, 2), "utf-8");
 }

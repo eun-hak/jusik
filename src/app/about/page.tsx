@@ -34,17 +34,18 @@ const contacts = [
     href: "mailto:hello@jusikilgi.com",
     label: "hello@jusikilgi.com",
   },
-  {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
-      </svg>
-    ),
-    title: "카카오 오픈채팅",
-    desc: "투자 이야기를 편하게 나눠요.",
-    href: "https://open.kakao.com",
-    label: "오픈채팅 입장하기",
-  },
+  // 카카오 오픈채팅 일단 비활성화
+  // {
+  //   icon: (
+  //     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+  //       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+  //     </svg>
+  //   ),
+  //   title: "카카오 오픈채팅",
+  //   desc: "투자 이야기를 편하게 나눠요.",
+  //   href: "https://open.kakao.com",
+  //   label: "오픈채팅 입장하기",
+  // },
 ];
 
 export default function AboutPage() {

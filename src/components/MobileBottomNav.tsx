@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid, Search, User, Mail } from "lucide-react";
+import { Home, FileText, Search } from "lucide-react";
 
 interface NavItem {
   icon: React.ReactNode;
@@ -12,10 +12,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { icon: <Home size={22} />, label: "홈", href: "/" },
-  { icon: <LayoutGrid size={22} />, label: "카테고리", href: "/category" },
+  { icon: <FileText size={22} />, label: "최신글", href: "/articles" },
   { icon: <Search size={22} />, label: "검색", href: "/search" },
-  { icon: <User size={22} />, label: "소개", href: "/about" },
-  { icon: <Mail size={22} />, label: "구독", href: "/newsletter" },
+  // { icon: <Mail size={22} />, label: "구독", href: "/newsletter" }, // 구독 기능 일단 비활성화
 ];
 
 export default function MobileBottomNav() {
