@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
-import ConditionalLayout from "@/components/ConditionalLayout";
 import Script from "next/script";
 import { SITE_URL } from "@/lib/config";
 
@@ -48,20 +47,20 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
+        {process.env.NEXT_PUBLIC_ADSENSE_ID ? (
           <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
             crossOrigin="anonymous"
             strategy="afterInteractive"
           />
-        )}
+        ) : null}
       </head>
       <body
         className={`${cormorantGaramond.variable} ${outfit.variable} antialiased`}
       >
         <a href="#main-content" className="skip-link">본문으로 바로가기</a>
-        <ConditionalLayout>{children}</ConditionalLayout>
+        {children}
       </body>
     </html>
   );

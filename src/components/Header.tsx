@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Search, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 interface NavItem {
@@ -17,10 +17,15 @@ const navItems: NavItem[] = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  useEffect(() => setMounted(true), []);
+
+  const isActive = (href: string) => {
+    if (!mounted || pathname == null) return false;
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  };
 
   return (
     <header className="bg-white w-full">

@@ -24,7 +24,9 @@ export interface StockItem {
 
 export async function GET() {
   try {
-    const yahooFinance = new YahooFinance();
+    const yahooFinance = new YahooFinance({
+      suppressNotices: ["yahooSurvey"],
+    });
     const symbols = STOCKS.map((s) => s.symbol);
 
     const quotes = await yahooFinance.quote(symbols, {
