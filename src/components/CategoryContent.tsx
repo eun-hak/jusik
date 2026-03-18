@@ -11,7 +11,7 @@ interface Article {
   date: string;
   category: string;
   readTime: string;
-  imageUrl: string;
+  imageUrl?: string;
   subTags?: string[];
 }
 
@@ -86,14 +86,16 @@ export default function CategoryContent({ tags, articles }: CategoryContentProps
                     {article.excerpt}
                   </p>
                 </div>
-                <div className="relative w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
-                  <Image
-                    src={article.imageUrl}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                {article.imageUrl && (
+                  <div className="relative w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                    <Image
+                      src={article.imageUrl}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
               </article>
             </Link>
           ))}

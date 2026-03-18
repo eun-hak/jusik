@@ -10,6 +10,7 @@ const BLOCK_LABELS: Record<ContentBlockType, string> = {
   h2: "H2 제목",
   h3: "H3 소제목",
   quote: "인용구",
+  image: "이미지",
 };
 
 function newBlock(type: ContentBlockType = "p"): ContentBlock {
@@ -167,65 +168,105 @@ export default function ArticleForm({ initial }: Props) {
           <p className="font-body text-xs font-semibold text-gray-400 tracking-widest uppercase">본문</p>
 
           {blocks.map((block, idx) => (
-            <div key={block.id} className="group flex gap-2 items-start">
-              {/* 컨트롤 */}
-              <div className="flex flex-col gap-0.5 pt-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
-                <button
-                  onClick={() => moveBlock(idx, "up")}
-                  disabled={idx === 0}
-                  className="p-1 text-gray-400 hover:text-black disabled:opacity-20 transition-colors"
-                  title="위로"
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 8l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => moveBlock(idx, "down")}
-                  disabled={idx === blocks.length - 1}
-                  className="p-1 text-gray-400 hover:text-black disabled:opacity-20 transition-colors"
-                  title="아래로"
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* 블록 본체 */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <select
-                    value={block.type}
-                    onChange={(e) => updateBlock(idx, { type: e.target.value as ContentBlockType })}
-                    className="font-body text-[11px] text-gray-400 border border-gray-200 rounded px-2 py-0.5 bg-white focus:outline-none focus:border-gray-400"
-                  >
-                    {(Object.entries(BLOCK_LABELS) as [ContentBlockType, string][]).map(([v, l]) => (
-                      <option key={v} value={v}>{l}</option>
-                    ))}
-                  </select>
+            <div key={block.id} className="flex flex-col gap-0">
+              {/* 블록 */}
+              <div className="group flex gap-2 items-start">
+                {/* 순서 컨트롤 */}
+                <div className="flex flex-col gap-0.5 pt-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                   <button
-                    onClick={() => removeBlock(idx)}
-                    className="opacity-0 group-hover:opacity-100 font-body text-[11px] text-red-400 hover:text-red-600 transition-all"
+                    onClick={() => moveBlock(idx, "up")}
+                    disabled={idx === 0}
+                    className="p-1 text-gray-400 hover:text-black disabled:opacity-20 transition-colors"
+                    title="위로"
                   >
-                    삭제
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 8l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => moveBlock(idx, "down")}
+                    disabled={idx === blocks.length - 1}
+                    className="p-1 text-gray-400 hover:text-black disabled:opacity-20 transition-colors"
+                    title="아래로"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </button>
                 </div>
-                <textarea
-                  value={block.text}
-                  onChange={(e) => updateBlock(idx, { text: e.target.value })}
-                  placeholder={
-                    block.type === "p" ? "문단 내용을 입력하세요..." :
-                    block.type === "h2" ? "H2 제목..." :
-                    block.type === "h3" ? "H3 소제목..." : "인용구..."
-                  }
-                  rows={block.type === "p" ? 3 : 2}
-                  className={`w-full font-body text-sm text-gray-700 border border-gray-100 rounded-lg px-3 py-2.5 focus:outline-none focus:border-gray-300 resize-y bg-gray-50 transition-colors ${
-                    block.type === "h2" ? "font-heading text-lg font-medium" :
-                    block.type === "h3" ? "font-heading text-base font-medium" :
-                    block.type === "quote" ? "italic border-l-4 border-l-[#6B2D3C] rounded-l-none pl-4" : ""
-                  }`}
-                />
+
+                {/* 블록 본체 */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <select
+                      value={block.type}
+                      onChange={(e) => updateBlock(idx, { type: e.target.value as ContentBlockType })}
+                      className="font-body text-[11px] text-gray-400 border border-gray-200 rounded px-2 py-0.5 bg-white focus:outline-none focus:border-gray-400"
+                    >
+                      {(Object.entries(BLOCK_LABELS) as [ContentBlockType, string][]).map(([v, l]) => (
+                        <option key={v} value={v}>{l}</option>
+                      ))}
+                    </select>
+                    <button
+                      onClick={() => removeBlock(idx)}
+                      className="opacity-0 group-hover:opacity-100 font-body text-[11px] text-red-400 hover:text-red-600 transition-all"
+                    >
+                      삭제
+                    </button>
+                  </div>
+                  {block.type === "image" ? (
+                    <div className="flex flex-col gap-2">
+                      <input
+                        type="text"
+                        value={block.imageUrl ?? ""}
+                        onChange={(e) => updateBlock(idx, { imageUrl: e.target.value })}
+                        placeholder="이미지 URL (https://...)"
+                        className="w-full font-body text-sm text-gray-700 border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300 bg-gray-50"
+                      />
+                      <input
+                        type="text"
+                        value={block.imageCaption ?? ""}
+                        onChange={(e) => updateBlock(idx, { imageCaption: e.target.value })}
+                        placeholder="캡션 (선택)"
+                        className="w-full font-body text-xs text-gray-500 border border-gray-100 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-300 bg-gray-50"
+                      />
+                    </div>
+                  ) : (
+                    <textarea
+                      value={block.text}
+                      onChange={(e) => updateBlock(idx, { text: e.target.value })}
+                      placeholder={
+                        block.type === "p" ? "문단 내용을 입력하세요..." :
+                        block.type === "h2" ? "H2 제목..." :
+                        block.type === "h3" ? "H3 소제목..." : "인용구..."
+                      }
+                      rows={block.type === "p" ? 3 : 2}
+                      className={`w-full font-body text-sm text-gray-700 border border-gray-100 rounded-lg px-3 py-2.5 focus:outline-none focus:border-gray-300 resize-y bg-gray-50 transition-colors ${
+                        block.type === "h2" ? "font-heading text-lg font-medium" :
+                        block.type === "h3" ? "font-heading text-base font-medium" :
+                        block.type === "quote" ? "italic border-l-4 border-l-[#6B2D3C] rounded-l-none pl-4" : ""
+                      }`}
+                    />
+                  )}
+                </div>
+              </div>
+
+              {/* 블록 사이 삽입 버튼 */}
+              <div className="group/insert flex items-center gap-1 h-5 pl-7">
+                <div className="flex-1 h-px bg-gray-100 group-hover/insert:bg-gray-300 transition-colors" />
+                <div className="opacity-0 group-hover/insert:opacity-100 transition-opacity flex gap-1">
+                  {(Object.entries(BLOCK_LABELS) as [ContentBlockType, string][]).map(([type, label]) => (
+                    <button
+                      key={type}
+                      onClick={() => addBlock(type, idx)}
+                      className="font-body text-[10px] text-gray-400 hover:text-black border border-gray-200 hover:border-gray-400 rounded px-1.5 py-0.5 bg-white transition-colors whitespace-nowrap"
+                      title={`${label} 삽입`}
+                    >
+                      + {label}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex-1 h-px bg-gray-100 group-hover/insert:bg-gray-300 transition-colors" />
               </div>
             </div>
           ))}

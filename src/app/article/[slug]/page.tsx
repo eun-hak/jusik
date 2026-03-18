@@ -27,13 +27,15 @@ export async function generateMetadata({
       publishedTime: article.publishedTime,
       authors: [article.author],
       url: `${SITE_URL}/article/${article.slug}`,
-      images: [{ url: article.imageUrl, width: 1200, height: 630, alt: article.title }],
+      ...(article.imageUrl && {
+        images: [{ url: article.imageUrl, width: 1200, height: 630, alt: article.title }],
+      }),
     },
     twitter: {
-      card: "summary_large_image",
+      card: article.imageUrl ? "summary_large_image" : "summary",
       title: article.title,
       description: article.description,
-      images: [article.imageUrl],
+      ...(article.imageUrl && { images: [article.imageUrl] }),
     },
   };
 }
@@ -71,7 +73,7 @@ export default async function ArticleDetailPage({
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    image: article.imageUrl,
+    ...(article.imageUrl && { image: article.imageUrl }),
     datePublished: article.publishedTime,
     dateModified: article.updatedAt,
     author: { "@type": "Person", name: article.author },
@@ -94,22 +96,22 @@ export default async function ArticleDetailPage({
       />
 
       {/* Article Header */}
-      <section className="bg-white pt-12 pb-8">
-        <div className="max-w-[760px] mx-auto px-5 flex flex-col items-center text-center gap-5">
-          <span className="badge-burgundy text-[11px] tracking-widest uppercase">
+      <section className="bg-white pt-10 pb-8 border-b border-gray-100">
+        <div className="max-w-[680px] mx-auto px-5 flex flex-col gap-4">
+          <span className="badge-burgundy text-[11px] tracking-widest uppercase self-start">
             {article.category}
           </span>
-          <h1 className="font-heading text-3xl md:text-5xl font-medium text-black leading-tight">
+          <h1 className="font-heading text-3xl md:text-4xl font-medium text-black leading-tight">
             {article.title}
           </h1>
-          <p className="font-body text-[15px] text-gray-600 leading-relaxed">
+          <p className="font-body text-[15px] text-gray-500 leading-relaxed">
             {article.subtitle}
           </p>
-          <div className="flex items-center gap-4 mt-1">
-            <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-heading text-sm font-semibold">주</span>
+          <div className="flex items-center gap-3 pt-1 border-t border-gray-100 mt-1">
+            <div className="w-7 h-7 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-heading text-xs font-semibold">주</span>
             </div>
-            <div className="flex items-center gap-3 font-body text-sm text-gray-500">
+            <div className="flex items-center gap-2 font-body text-sm text-gray-500">
               <span className="font-medium text-black">{article.author}</span>
               <span className="text-gray-300">·</span>
               <span>{article.date}</span>
@@ -119,21 +121,6 @@ export default async function ArticleDetailPage({
           </div>
         </div>
       </section>
-
-      {/* Hero Image */}
-      {article.imageUrl && (
-        <div className="w-full aspect-[16/7] relative overflow-hidden bg-gray-100">
-          <Image
-            src={article.imageUrl}
-            alt={article.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      )}
-
-      <div className="divider" />
 
       {/* Article Body + Sidebar */}
       <section className="container-desktop py-12 md:py-16">
@@ -171,6 +158,25 @@ export default async function ArticleDetailPage({
                       {block.text}
                     </p>
                   </blockquote>
+                );
+              }
+              if (block.type === "image" && block.imageUrl) {
+                return (
+                  <figure key={block.id} className="my-6 max-w-2xl mx-auto">
+                    <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src={block.imageUrl}
+                        alt={block.imageCaption ?? block.text ?? ""}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    {block.imageCaption && (
+                      <figcaption className="font-body text-xs text-gray-400 text-center mt-2">
+                        {block.imageCaption}
+                      </figcaption>
+                    )}
+                  </figure>
                 );
               }
               return (

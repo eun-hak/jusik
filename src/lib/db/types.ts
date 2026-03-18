@@ -1,9 +1,11 @@
-export type ContentBlockType = "h2" | "h3" | "p" | "quote";
+export type ContentBlockType = "h2" | "h3" | "p" | "quote" | "image";
 
 export interface ContentBlock {
   id: string;
   type: ContentBlockType;
   text: string;
+  imageUrl?: string;
+  imageCaption?: string;
 }
 
 export interface Article {
@@ -17,7 +19,7 @@ export interface Article {
   publishedTime: string;
   readTime: string;
   author: string;
-  imageUrl: string;
+  imageUrl?: string;
   content: ContentBlock[];
   tags: string[];
   status: "draft" | "published";
