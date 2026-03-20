@@ -19,6 +19,7 @@ interface DbMeta {
  * 2. 관리자 페이지에서 작성/수정/삭제한 글은 .mock-db.json에 저장됨
  * 3. seed에 있는 id가 .mock-db.json에 없으면 병합 (seed는 "추가 소스" 역할)
  * 4. 관리자에서 seed 글을 삭제하면 deletedSeedIds에 기록 → seed에 있어도 다시 병합되지 않음 (삭제 유지)
+ * 5. 같은 id가 .mock-db.json에 이미 있으면 시드 글은 무시됨 → 시드에 넣는 신규 글 id는 파일에 없는 번호를 쓸 것
  */
 const DB_FILE = path.join(process.cwd(), ".mock-db.json");
 
@@ -540,7 +541,7 @@ const seed: Article[] = [
     ],
   },
   {
-    id: "5",
+    id: "7",
     slug: "stock-chart-support-resistance-meaning",
     title: "주식 지지선 저항선 뜻 | 차트에서 가격이 자꾸 멈추는 이유",
     subtitle:
@@ -552,8 +553,7 @@ const seed: Article[] = [
     publishedTime: "2026-03-20T09:00:00+09:00",
     readTime: "11분",
     author: "주식일기",
-    imageUrl:
-      "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1200&q=80",
+    imageUrl: "/img/id7.png",
     tags: ["지지선", "저항선", "차트", "주식", "기술적분석"],
     status: "published",
     createdAt: "2026-03-20T09:00:00+09:00",
@@ -578,6 +578,14 @@ const seed: Article[] = [
         id: "sr4",
         type: "p",
         text: "이번 글에서는 지지선과 저항선의 뜻을 쉽게 풀어서 설명하고, 왜 많은 투자자들이 이 가격대를 중요하게 보는지 정리해보겠습니다.",
+      },
+      {
+        id: "sr-img7",
+        type: "image",
+        text: "",
+        imageUrl: "/img/id7.png",
+        imageCaption: "지지·저항, 돌파·이탈을 한눈에",
+        imageContain: true,
       },
       { id: "sr5", type: "h2", text: "지지선은 주가가 버티는 가격대다" },
       {
@@ -795,7 +803,7 @@ const seed: Article[] = [
     ],
   },
   {
-    id: "6",
+    id: "8",
     slug: "stock-chart-box-range-meaning",
     title: "주식 박스권 뜻 쉽게 이해하기 | 차트가 일정 가격에서만 움직이는 이유",
     subtitle:
@@ -807,8 +815,7 @@ const seed: Article[] = [
     publishedTime: "2026-03-21T09:00:00+09:00",
     readTime: "12분",
     author: "주식일기",
-    imageUrl:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+    imageUrl: "/img/id8.png",
     tags: ["박스권", "횡보", "차트", "지지선", "저항선", "기술적분석"],
     status: "published",
     createdAt: "2026-03-21T09:00:00+09:00",
@@ -833,6 +840,14 @@ const seed: Article[] = [
         id: "bx4",
         type: "p",
         text: "이번 글에서는 박스권 뜻이 무엇인지, 왜 많은 투자자들이 주식 차트에서 박스권을 중요하게 보는지 쉽게 정리해보겠습니다.",
+      },
+      {
+        id: "bx-img8",
+        type: "image",
+        text: "",
+        imageUrl: "/img/id8.png",
+        imageCaption: "박스권·상하단 돌파·이탈 요약",
+        imageContain: true,
       },
       { id: "bx5", type: "h2", text: "박스권은 일정한 가격 범위 안에 갇힌 흐름이다" },
       {

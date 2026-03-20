@@ -179,6 +179,27 @@ export default async function ArticleDetailPage({
                 );
               }
               if (block.type === "image" && block.imageUrl) {
+                const compact = block.imageContain;
+                if (compact) {
+                  return (
+                    <figure key={block.id} className="my-5 mx-auto max-w-xl">
+                      {/* 고정 aspect 비우면 object-contain 시 위·아래 회색이 생김 → 높이는 이미지에 맞춤 */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={block.imageUrl}
+                        alt={block.imageCaption ?? block.text ?? ""}
+                        className="block w-full h-auto rounded-lg"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {block.imageCaption && (
+                        <figcaption className="font-body text-xs text-gray-400 text-center mt-2">
+                          {block.imageCaption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  );
+                }
                 return (
                   <figure key={block.id} className="my-6 max-w-2xl mx-auto">
                     <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-gray-100">

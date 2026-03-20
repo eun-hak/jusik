@@ -4,9 +4,10 @@
  * yarn webp (package.json) — WebP 변환 + AI 워터마크(오른쪽·아래) 가장자리 크롭 기본
  * yarn webp:plain — 크롭 없이 WebP만
  *
- * 수동:
- *   STRIP_AI_WATERMARK=1 node scripts/images-to-img-webp.mjs
+ * 수동 (Windows는 환경변수 앞에 붙이는 방식이 안 되므로 --strip-watermark 권장):
+ *   node scripts/images-to-img-webp.mjs --strip-watermark
  *   node scripts/images-to-img-webp.mjs --strip-watermark --strip-pct 8
+ *   (Unix) STRIP_AI_WATERMARK=1 node scripts/images-to-img-webp.mjs
  */
 import sharp from "sharp";
 import path from "path";

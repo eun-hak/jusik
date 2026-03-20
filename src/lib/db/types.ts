@@ -6,6 +6,8 @@ export interface ContentBlock {
   text: string;
   imageUrl?: string;
   imageCaption?: string;
+  /** 인포그래피 등: 잘리지 않게 contain + 좁은 최대 너비 */
+  imageContain?: boolean;
 }
 
 export interface Article {
