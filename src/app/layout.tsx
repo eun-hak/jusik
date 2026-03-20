@@ -22,7 +22,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "주식일기 | 주식 투자의 모든 것",
   description: "시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한 인사이트를 전합니다.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    url: SITE_URL,
     title: "주식일기 | 주식 투자의 모든 것",
     description: "시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한 인사이트를 전합니다.",
     siteName: "주식일기",
@@ -34,10 +38,15 @@ export const metadata: Metadata = {
     title: "주식일기 | 주식 투자의 모든 것",
     description: "시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한 인사이트를 전합니다.",
   },
-  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
-    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
-  }),
+  verification: {
+    google: "nGLC6wqeingyxdWpDtTR9DKlBw7TNDT9A8_l8PrHWt0",
+  },
+  other: {
+    "naver-site-verification": "a59476ff561c68cdd35aac5c09594b12a99db892",
+  },
 };
+
+const GA_MEASUREMENT_ID = "G-B7ZFS1S7YS";
 
 export default function RootLayout({
   children,
@@ -59,6 +68,18 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${outfit.variable} antialiased`}
       >
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <a href="#main-content" className="skip-link">본문으로 바로가기</a>
         {children}
       </body>

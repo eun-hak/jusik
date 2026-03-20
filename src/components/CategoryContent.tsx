@@ -68,9 +68,9 @@ export default function CategoryContent({ tags, articles }: CategoryContentProps
         <div className="flex flex-col gap-0">
           {filteredArticles.map((article) => (
             <Link key={article.slug} href={`/article/${article.slug}`} className="group">
-              <article className="flex items-start gap-6 py-7 border-t border-gray-200 last:border-b">
+              <article className="flex items-start gap-3 py-7 max-[360px]:py-5 border-t border-gray-200 last:border-b md:gap-6">
                 <div className="flex-1 min-w-0 flex flex-col gap-3">
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 min-w-0">
                     <span className="font-body text-xs text-gray-500">{article.date}</span>
                     <span className="text-gray-200">·</span>
                     <span className="font-body text-xs text-burgundy font-medium">
@@ -79,15 +79,15 @@ export default function CategoryContent({ tags, articles }: CategoryContentProps
                     <span className="text-gray-200">·</span>
                     <span className="font-body text-xs text-gray-500">{article.readTime}</span>
                   </div>
-                  <h2 className="font-heading text-xl md:text-2xl font-medium text-black leading-snug group-hover:text-burgundy transition-colors">
+                  <h2 className="font-heading text-lg max-[360px]:text-base md:text-2xl font-medium text-black leading-snug break-keep [overflow-wrap:anywhere] group-hover:text-burgundy transition-colors">
                     {article.title}
                   </h2>
-                  <p className="font-body text-sm text-gray-600 leading-relaxed line-clamp-2">
+                  <p className="font-body text-[13px] md:text-sm text-gray-600 leading-relaxed line-clamp-2 break-keep [overflow-wrap:anywhere]">
                     {article.excerpt}
                   </p>
                 </div>
                 {article.imageUrl && (
-                  <div className="relative w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                  <div className="relative w-24 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
                     <Image
                       src={article.imageUrl}
                       alt={article.title}

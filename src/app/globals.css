@@ -76,7 +76,14 @@ h1, h2, h3, h4, h5, h6,
 
 /* Utility Classes */
 .container-desktop {
-  @apply w-full max-w-[1440px] mx-auto px-5 md:px-[120px];
+  @apply w-full max-w-[1440px] mx-auto px-4 md:px-[120px];
+}
+
+@media (max-width: 360px) {
+  .container-desktop {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }
 
 .container-mobile {

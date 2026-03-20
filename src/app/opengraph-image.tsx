@@ -1,10 +1,20 @@
 import { ImageResponse } from "next/og";
+import { SITE_URL } from "@/lib/config";
 
 export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+function siteHostname(): string {
+  try {
+    return new URL(SITE_URL).hostname;
+  } catch {
+    return "stock.plentyer.com";
+  }
+}
+
 export default async function OGImage() {
+  const hostname = siteHostname();
   return new ImageResponse(
     (
       <div
@@ -173,7 +183,7 @@ export default async function OGImage() {
               letterSpacing: "0.5px",
             }}
           >
-            jusikilgi.com
+            {hostname}
           </span>
         </div>
       </div>

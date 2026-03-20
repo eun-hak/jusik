@@ -5,12 +5,8 @@ import { getArticles } from "@/lib/db/articles";
 /** DB(.mock-db.json 등) 변경이 곧바로 반영되도록 (배포 없이 파일만 갱신하는 환경 대비) */
 export const dynamic = "force-dynamic";
 
-function baseUrl(): string {
-  return SITE_URL.replace(/\/+$/, "");
-}
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = baseUrl();
+  const base = SITE_URL;
   const published = getArticles({ status: "published" });
 
   const staticRoutes: MetadataRoute.Sitemap = [

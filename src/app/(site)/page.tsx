@@ -68,13 +68,13 @@ export default function HomePage() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           {/* Main: Article List */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-heading text-2xl font-medium text-black">
+            <div className="flex items-center justify-between gap-3 mb-4 min-w-0">
+              <h2 className="font-heading text-2xl font-medium text-black min-w-0">
                 최신 글
               </h2>
               <Link
                 href="/articles"
-                className="font-body text-sm text-gray-500 hover:text-black transition-colors md:hidden"
+                className="shrink-0 font-body text-sm text-gray-500 hover:text-black transition-colors md:hidden"
               >
                 전체 보기 →
               </Link>

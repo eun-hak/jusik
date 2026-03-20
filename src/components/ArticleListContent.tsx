@@ -39,32 +39,40 @@ export default function ArticleListContent({ articles }: ArticleListContentProps
       {paginated.length > 0 ? (
         <div className="flex flex-col gap-0">
           {paginated.map((article) => (
-            <Link key={article.slug} href={`/article/${article.slug}`} className="group">
-              <article className="flex items-start gap-6 py-7 border-t border-gray-200 last:border-b">
+            <Link
+              key={article.slug}
+              href={`/article/${article.slug}`}
+              className="group block w-full min-w-0"
+            >
+              {/* 모바일: 이미지 위·텍스트 아래로 정렬해 좁은 폭에서 삐뚤어짐 방지 / md+: 가로 컴팩트 행 */}
+              <article className="flex flex-col gap-3 py-5 border-t border-gray-200 last:border-b md:flex-row md:items-start md:gap-6 md:py-7">
                 {article.imageUrl && (
-                  <div className="relative w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                  <div className="relative h-[5.25rem] w-full shrink-0 overflow-hidden rounded-lg bg-gray-100 md:h-28 md:w-40">
                     <Image
                       src={article.imageUrl}
                       alt={article.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 160px"
+                      className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                     />
                   </div>
                 )}
-                <div className="flex-1 min-w-0 flex flex-col gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="font-body text-xs text-gray-500">{article.date}</span>
+                <div className="flex min-w-0 flex-1 flex-col gap-1.5 md:gap-3">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-gray-500">
+                    <span className="font-body tabular-nums">{article.date}</span>
                     {article.readTime && (
                       <>
-                        <span className="text-gray-200">·</span>
-                        <span className="font-body text-xs text-gray-500">{article.readTime}</span>
+                        <span className="text-gray-200" aria-hidden>
+                          ·
+                        </span>
+                        <span className="font-body">{article.readTime}</span>
                       </>
                     )}
                   </div>
-                  <h2 className="font-heading text-xl md:text-2xl font-medium text-black leading-snug group-hover:text-burgundy transition-colors">
+                  <h2 className="font-heading text-[17px] font-medium leading-snug text-black lining-nums [overflow-wrap:anywhere] group-hover:text-burgundy transition-colors md:text-2xl">
                     {article.title}
                   </h2>
-                  <p className="font-body text-sm text-gray-600 leading-relaxed line-clamp-2">
+                  <p className="font-body text-[13px] leading-relaxed text-gray-600 line-clamp-2 [overflow-wrap:anywhere] md:text-sm">
                     {article.excerpt}
                   </p>
                 </div>
