@@ -272,7 +272,7 @@ export default async function ArticleDetailPage({
           <div className="divider" />
           <section className="container-desktop py-12 md:py-16">
             <h2 className="font-heading text-2xl font-medium text-black mb-8">관련 글</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-3 md:gap-6">
               {relatedArticles.map((a) => (
                 <ArticleCard key={a.slug} article={a} variant="featured" />
               ))}

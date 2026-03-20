@@ -24,13 +24,13 @@ export default function ArticleCard({
 }: ArticleCardProps) {
   const { slug, title, excerpt, date, category, readTime, imageUrl } = article;
 
-  // Featured card with large image (mobile style)
+  // Featured card — 관련 글 그리드용: 컴팩트 + 행 높이 맞춤 (h-full, 제목·요약 2줄 고정 영역)
   if (variant === "featured") {
     return (
-      <Link href={`/article/${slug}`} className="block group">
-        <article className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          {imageUrl && (
-            <div className="relative w-full h-40 md:h-52">
+      <Link href={`/article/${slug}`} className="block h-full min-h-0 group">
+        <article className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white">
+          {imageUrl ? (
+            <div className="relative h-32 w-full shrink-0 md:h-40">
               <Image
                 src={imageUrl}
                 alt={title}
@@ -38,18 +38,22 @@ export default function ArticleCard({
                 className="object-cover"
               />
             </div>
+          ) : (
+            <div className="h-32 shrink-0 bg-gray-100 md:h-40" aria-hidden />
           )}
-          <div className="p-4 flex flex-col gap-2.5">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-semibold bg-burgundy text-white">
+          <div className="flex min-h-0 flex-1 flex-col gap-2 p-3">
+            <div className="flex shrink-0 flex-wrap items-center gap-1.5">
+              <span className="inline-flex items-center rounded-full bg-burgundy px-2 py-0.5 text-[8px] font-semibold text-white md:text-[9px]">
                 {category}
               </span>
-              <span className="text-gray-500 font-body text-[11px]">{date}</span>
+              <span className="font-body text-[10px] text-gray-500 md:text-[11px]">
+                {date}
+              </span>
             </div>
-            <h3 className="font-heading text-lg font-medium text-black leading-tight group-hover:text-burgundy transition-colors">
+            <h3 className="font-heading min-h-[2.75rem] text-base font-medium leading-snug text-black line-clamp-2 group-hover:text-burgundy transition-colors md:min-h-[3rem] md:text-[17px] md:leading-tight">
               {title}
             </h3>
-            <p className="font-body text-xs text-gray-600 leading-relaxed line-clamp-2">
+            <p className="mt-auto min-h-[2.35rem] font-body text-[11px] leading-snug text-gray-600 line-clamp-2 md:text-xs md:leading-relaxed">
               {excerpt}
             </p>
           </div>
