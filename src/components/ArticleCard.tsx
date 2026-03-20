@@ -89,34 +89,45 @@ export default function ArticleCard({
     );
   }
 
-  // Default list card (desktop style - no image)
+  // Default list card (desktop style - with compact thumbnail)
   return (
     <Link href={`/article/${slug}`} className="block group">
-      <article className="py-8 border-t border-gray-200">
-        <div className="flex flex-col gap-5">
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+      <article className="py-7 border-t border-gray-200">
+        <div className="flex items-start gap-6">
+          {/* Thumbnail (left) */}
+          {imageUrl && (
+            <div className="relative w-28 h-20 md:w-36 md:h-24 rounded-lg overflow-hidden flex-shrink-0">
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+
+          {/* Text */}
+          <div className="flex-1 min-w-0 flex flex-col gap-3">
+            <div className="flex items-center gap-3">
               <span className="text-gray-500 font-body text-xs">{date}</span>
               <span className="text-gray-300 font-body text-xs">•</span>
               <span className="text-burgundy font-body text-xs font-medium tracking-wide">
                 {category}
               </span>
+              {readTime && (
+                <>
+                  <span className="text-gray-300 font-body text-xs">•</span>
+                  <span className="text-gray-500 font-body text-xs">{readTime}</span>
+                </>
+              )}
             </div>
-            {readTime && (
-              <span className="text-gray-500 font-body text-xs">{readTime}</span>
-            )}
+            <h3 className="font-heading text-xl md:text-2xl font-medium text-black leading-snug group-hover:text-burgundy transition-colors">
+              {title}
+            </h3>
+            <p className="font-body text-[14px] text-gray-600 leading-relaxed line-clamp-2">
+              {excerpt}
+            </p>
           </div>
-
-          {/* Title */}
-          <h3 className="font-heading text-2xl md:text-[28px] font-medium text-black leading-snug group-hover:text-burgundy transition-colors">
-            {title}
-          </h3>
-
-          {/* Excerpt */}
-          <p className="font-body text-[15px] text-gray-600 leading-relaxed">
-            {excerpt}
-          </p>
         </div>
       </article>
     </Link>

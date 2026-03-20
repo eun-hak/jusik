@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "webp": "STRIP_AI_WATERMARK=1 node scripts/images-to-img-webp.mjs",
+    "webp:plain": "node scripts/images-to-img-webp.mjs",
     "img:webp": "node scripts/convert-to-webp.mjs",
+    "img:webp:dir": "node scripts/convert-to-webp.mjs --dir",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

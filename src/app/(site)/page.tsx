@@ -35,12 +35,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="bg-white py-16 md:py-24">
         <div className="container-desktop flex flex-col items-center text-center gap-6">
-          <span className="badge-burgundy text-[11px] tracking-widest uppercase">블로그</span>
           <h1 className="font-heading text-4xl md:text-6xl lg:text-[72px] font-medium text-black leading-tight max-w-3xl">
             주식 투자의 모든 것
           </h1>
           <p className="font-body text-[15px] md:text-base text-gray-600 leading-relaxed max-w-xl">
-            시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한 인사이트를 전합니다.
+            시장 분석부터 종목 탐구, 투자 전략까지. 더 나은 투자 결정을 위한
+            인사이트를 전합니다.
           </p>
           <div className="flex items-center gap-3 mt-2">
             <Link
@@ -66,39 +66,56 @@ export default function HomePage() {
       {/* Content + Sidebar */}
       <section className="container-desktop py-12 md:py-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-
           {/* Main: Article List */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-heading text-2xl font-medium text-black">최신 글</h2>
-              <Link href="/articles" className="font-body text-sm text-gray-500 hover:text-black transition-colors md:hidden">
+              <h2 className="font-heading text-2xl font-medium text-black">
+                최신 글
+              </h2>
+              <Link
+                href="/articles"
+                className="font-body text-sm text-gray-500 hover:text-black transition-colors md:hidden"
+              >
                 전체 보기 →
               </Link>
             </div>
 
             {latestArticles.length === 0 ? (
-              <p className="font-body text-sm text-gray-400 py-8">아직 발행된 글이 없습니다.</p>
+              <p className="font-body text-sm text-gray-400 py-8">
+                아직 발행된 글이 없습니다.
+              </p>
             ) : (
               <>
                 {/* Mobile: featured + compact */}
                 <div className="md:hidden flex flex-col gap-4">
                   <ArticleCard article={latestArticles[0]} variant="featured" />
                   {latestArticles.slice(1).map((article) => (
-                    <ArticleCard key={article.slug} article={article} variant="compact" />
+                    <ArticleCard
+                      key={article.slug}
+                      article={article}
+                      variant="compact"
+                    />
                   ))}
                 </div>
 
                 {/* Desktop: list */}
                 <div className="hidden md:block">
                   {latestArticles.map((article) => (
-                    <ArticleCard key={article.slug} article={article} variant="list" />
+                    <ArticleCard
+                      key={article.slug}
+                      article={article}
+                      variant="list"
+                    />
                   ))}
                 </div>
               </>
             )}
 
             <div className="hidden md:block mt-6 pt-6 border-t border-gray-200">
-              <Link href="/articles" className="btn-secondary font-body text-sm px-6 py-3 rounded-md">
+              <Link
+                href="/articles"
+                className="btn-secondary font-body text-sm px-6 py-3 rounded-md"
+              >
                 더보기
               </Link>
             </div>
@@ -106,7 +123,6 @@ export default function HomePage() {
 
           {/* Sidebar */}
           <aside className="w-full lg:w-[300px] flex-shrink-0 flex flex-col gap-10">
-
             {/* Recent Articles */}
             {recentArticles.length > 0 && (
               <div>
@@ -116,7 +132,10 @@ export default function HomePage() {
                 <ol className="flex flex-col gap-4">
                   {recentArticles.map((article, i) => (
                     <li key={article.slug}>
-                      <Link href={`/article/${article.slug}`} className="flex items-start gap-4 group">
+                      <Link
+                        href={`/article/${article.slug}`}
+                        className="flex items-start gap-4 group"
+                      >
                         <span className="font-heading text-2xl font-medium text-gray-200 leading-none w-7 flex-shrink-0">
                           {String(i + 1).padStart(2, "0")}
                         </span>
@@ -141,7 +160,6 @@ export default function HomePage() {
               <NewsletterForm variant="dark" />
             </div>
             */}
-
           </aside>
         </div>
       </section>

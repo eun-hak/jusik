@@ -41,6 +41,16 @@ export default function ArticleListContent({ articles }: ArticleListContentProps
           {paginated.map((article) => (
             <Link key={article.slug} href={`/article/${article.slug}`} className="group">
               <article className="flex items-start gap-6 py-7 border-t border-gray-200 last:border-b">
+                {article.imageUrl && (
+                  <div className="relative w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                    <Image
+                      src={article.imageUrl}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="flex-1 min-w-0 flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <span className="font-body text-xs text-gray-500">{article.date}</span>
@@ -58,16 +68,6 @@ export default function ArticleListContent({ articles }: ArticleListContentProps
                     {article.excerpt}
                   </p>
                 </div>
-                {article.imageUrl && (
-                  <div className="relative w-28 h-20 md:w-40 md:h-28 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
-                    <Image
-                      src={article.imageUrl}
-                      alt={article.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
               </article>
             </Link>
           ))}

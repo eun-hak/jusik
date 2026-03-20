@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { ChevronLeft } from "lucide-react";
 import ArticleCard, { Article as CardArticle } from "@/components/ArticleCard";
 import { getArticleBySlug, getArticles } from "@/lib/db/articles";
 import { SITE_URL } from "@/lib/config";
@@ -95,36 +96,50 @@ export default async function ArticleDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Article Header */}
-      <section className="bg-white pt-10 pb-8 border-b border-gray-100">
-        <div className="max-w-[680px] mx-auto px-5 flex flex-col gap-4">
-          <span className="badge-burgundy text-[11px] tracking-widest uppercase self-start">
-            {article.category}
-          </span>
-          <h1 className="font-heading text-3xl md:text-4xl font-medium text-black leading-tight">
-            {article.title}
-          </h1>
-          <p className="font-body text-[15px] text-gray-500 leading-relaxed">
-            {article.subtitle}
-          </p>
-          <div className="flex items-center gap-3 pt-1 border-t border-gray-100 mt-1">
-            <div className="w-7 h-7 bg-black rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-heading text-xs font-semibold">주</span>
+      {/* Article Header - 본문과 같은 컬럼에 맞춰 정렬 (데스크톱) */}
+      <section className="bg-white pt-6 md:pt-8 pb-8 border-b border-gray-100">
+        <div className="container-desktop">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+            <div className="flex-1 min-w-0 max-w-[680px] flex flex-col gap-4">
+              <Link
+                href="/articles"
+                className="inline-flex items-center gap-0.5 -ml-0.5 font-body text-[11px] text-gray-500 hover:text-black transition-colors w-fit"
+                aria-label="글 목록으로"
+              >
+                <ChevronLeft className="size-3.5 shrink-0 opacity-70" aria-hidden />
+                목록
+              </Link>
+              <span className="badge-burgundy text-[11px] tracking-widest uppercase self-start">
+                {article.category}
+              </span>
+              <h1 className="font-heading text-3xl md:text-4xl font-medium text-black leading-tight">
+                {article.title}
+              </h1>
+              <p className="font-body text-[15px] text-gray-500 leading-relaxed">
+                {article.subtitle}
+              </p>
+              <div className="flex items-center gap-3 pt-1 border-t border-gray-100 mt-1">
+                <div className="w-7 h-7 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-heading text-xs font-semibold">주</span>
+                </div>
+                <div className="flex items-center gap-2 font-body text-sm text-gray-500">
+                  <span className="font-medium text-black">{article.author}</span>
+                  <span className="text-gray-300">·</span>
+                  <span>{article.date}</span>
+                  <span className="text-gray-300">·</span>
+                  <span>읽는 시간 {article.readTime}</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 font-body text-sm text-gray-500">
-              <span className="font-medium text-black">{article.author}</span>
-              <span className="text-gray-300">·</span>
-              <span>{article.date}</span>
-              <span className="text-gray-300">·</span>
-              <span>읽는 시간 {article.readTime}</span>
-            </div>
+            <div className="hidden lg:block w-[260px] flex-shrink-0" aria-hidden />
           </div>
         </div>
       </section>
 
       {/* Article Body + Sidebar */}
       <section className="container-desktop py-12 md:py-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        {/* 모바일: 목차가 본문 위로 (DOM은 본문→사이드, column-reverse로 순서만 뒤집음) */}
+        <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16">
 
           {/* Article Body */}
           <article className="flex-1 min-w-0 max-w-[680px]">
