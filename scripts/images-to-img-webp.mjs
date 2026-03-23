@@ -1,8 +1,9 @@
 /**
  * images/ 안의 png·jpg·jpeg → public/img/*.webp
  *
- * yarn webp (package.json) — WebP 변환 + AI 워터마크(오른쪽·아래) 가장자리 크롭 기본
- * yarn webp:plain — 크롭 없이 WebP만
+ * yarn webp — WebP 변환만 (images/ → public/img/)
+ * yarn webp_small — WebP + AI 워터마크(오른쪽·아래) 가장자리 크롭(용량·픽셀 감소)
+ * yarn webp:plain — webp 와 동일 (호환용)
  *
  * 수동 (Windows는 환경변수 앞에 붙이는 방식이 안 되므로 --strip-watermark 권장):
  *   node scripts/images-to-img-webp.mjs --strip-watermark
