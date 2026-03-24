@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import type { Article } from "./types";
+import article11 from "./article-11.json";
+import article12 from "./article-12.json";
 
 const META_KEY = "_meta";
 
@@ -1301,6 +1303,8 @@ const seed: Article[] = [
       },
     ],
   },
+  article11 as Article,
+  article12 as Article,
 ];
 
 export function readDb(): Map<string, Article> {
