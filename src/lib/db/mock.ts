@@ -12,6 +12,8 @@ import article11 from "./article-11.json";
 import article12 from "./article-12.json";
 import article13 from "./article-13.json";
 import article14 from "./article-14.json";
+import article15 from "./article-15.json";
+import article16 from "./article-16.json";
 
 const META_KEY = "_meta";
 
@@ -50,6 +52,8 @@ const seed: Article[] = [
   article12 as Article,
   article13 as Article,
   article14 as Article,
+  article15 as Article,
+  article16 as Article,
 ];
 
 export function readDb(): Map<string, Article> {
