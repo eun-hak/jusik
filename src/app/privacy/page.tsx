@@ -1,8 +1,12 @@
 import { Metadata } from 'next';
+import { SITE_URL } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: '개인정보처리방침 | 주식일기',
   description: '주식일기 개인정보처리방침',
+  alternates: {
+    canonical: `${SITE_URL}/privacy`,
+  },
 };
 
 const sections = [

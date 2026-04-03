@@ -3,12 +3,16 @@ import { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 import { getArticles } from "@/lib/db/articles";
 import ArticleListContent from "@/components/ArticleListContent";
+import { SITE_URL } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "모든 글 | 주식일기",
   description: "주식일기의 모든 글을 한눈에 확인하세요.",
+  alternates: {
+    canonical: `${SITE_URL}/articles`,
+  },
 };
 
 export default function ArticlesPage() {

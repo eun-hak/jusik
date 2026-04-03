@@ -22,7 +22,7 @@ export async function generateMetadata({
     title: `${article.title} | 주식일기`,
     description: article.description,
     alternates: {
-      canonical: `/article/${article.slug}`,
+      canonical: `${SITE_URL}/article/${article.slug}`,
     },
     openGraph: {
       title: article.title,

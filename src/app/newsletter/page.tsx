@@ -1,9 +1,13 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "뉴스레터 | 주식일기",
   description: "매주 월요일, 주요 시장 동향과 핵심 종목 분석을 이메일로 받아보세요.",
+  alternates: {
+    canonical: `${SITE_URL}/newsletter`,
+  },
 };
 
 /* 구독 기능 일단 비활성화 - 아래 원본 코드 참고

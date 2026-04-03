@@ -1,6 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { Metadata } from "next";
+import { SITE_URL } from "@/lib/config";
+
+export const metadata: Metadata = {
+  title: "소개 | 주식일기",
+  description: "2019년부터 국내·미국 주식을 직접 운용하며 배운 것들을 기록합니다. 장기 가치 투자를 믿으며, 리스크 관리를 가장 중요하게 생각합니다.",
+  alternates: {
+    canonical: `${SITE_URL}/about`,
+  },
+};
 
 const stats = [
   { value: "5년", label: "투자 경력" },
