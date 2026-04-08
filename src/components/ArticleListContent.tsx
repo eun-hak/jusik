@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { X } from "lucide-react";
 
 interface ArticleItem {
   slug: string;
@@ -15,11 +16,12 @@ interface ArticleItem {
 
 interface ArticleListContentProps {
   articles: ArticleItem[];
+  activeTag?: string;
 }
 
 const PAGE_SIZE = 10;
 
-export default function ArticleListContent({ articles }: ArticleListContentProps) {
+export default function ArticleListContent({ articles, activeTag }: ArticleListContentProps) {
   const [page, setPage] = useState(1);
 
   const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
@@ -28,11 +30,20 @@ export default function ArticleListContent({ articles }: ArticleListContentProps
 
   return (
     <>
-      {/* Count */}
+      {/* Count + active tag badge */}
       <div className="flex items-center justify-between mt-0 mb-0">
         <p className="font-body text-sm text-gray-500">
           총 <span className="text-black font-medium">{articles.length}</span>개의 글
         </p>
+        {activeTag && (
+          <Link
+            href="/articles"
+            className="inline-flex items-center gap-1.5 font-body text-xs text-gray-600 border border-gray-300 rounded-full px-3 py-1.5 hover:border-gray-500 hover:text-black transition-colors"
+          >
+            {activeTag}
+            <X className="size-3" aria-hidden />
+          </Link>
+        )}
       </div>
 
       {/* Article List */}

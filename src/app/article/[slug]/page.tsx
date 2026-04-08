@@ -53,10 +53,16 @@ export default async function ArticleDetailPage({
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
+  const articleTags = new Set(article.tags ?? []);
   const relatedArticles: CardArticle[] = getArticles({ status: "published" })
     .filter((a) => a.slug !== slug)
+    .map((a) => {
+      const overlap = (a.tags ?? []).filter((t) => articleTags.has(t)).length;
+      return { a, overlap };
+    })
+    .sort((x, y) => y.overlap - x.overlap || new Date(y.a.createdAt).getTime() - new Date(x.a.createdAt).getTime())
     .slice(0, 3)
-    .map((a) => ({
+    .map(({ a }) => ({
       slug: a.slug,
       title: a.title,
       excerpt: a.subtitle,
@@ -231,7 +237,7 @@ export default async function ArticleDetailPage({
                 {article.tags.map((tag) => (
                   <Link
                     key={tag}
-                    href={`/search?q=${encodeURIComponent(tag)}`}
+                    href={`/articles?tag=${encodeURIComponent(tag)}`}
                     className="font-body text-xs text-gray-600 border border-gray-200 rounded-full px-3 py-1.5 hover:border-gray-400 hover:text-black transition-colors"
                   >
                     {tag}

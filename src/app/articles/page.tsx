@@ -7,16 +7,36 @@ import { SITE_URL } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "모든 글 | 주식일기",
-  description: "주식일기의 모든 글을 한눈에 확인하세요.",
-  alternates: {
-    canonical: `${SITE_URL}/articles`,
-  },
-};
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}): Promise<Metadata> {
+  const { tag } = await searchParams;
+  return {
+    title: tag ? `"${tag}" 태그 글 | 주식일기` : "모든 글 | 주식일기",
+    description: tag
+      ? `주식일기에서 "${tag}" 태그가 붙은 글을 모아봤습니다.`
+      : "주식일기의 모든 글을 한눈에 확인하세요.",
+    alternates: {
+      canonical: `${SITE_URL}/articles`,
+    },
+  };
+}
 
-export default function ArticlesPage() {
-  const articles = getArticles({ status: "published" }).map((a) => ({
+export default async function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}) {
+  const { tag } = await searchParams;
+
+  const all = getArticles({ status: "published" });
+  const filtered = tag
+    ? all.filter((a) => (a.tags ?? []).includes(tag))
+    : all;
+
+  const articles = filtered.map((a) => ({
     slug: a.slug,
     title: a.title,
     excerpt: a.subtitle,
@@ -39,10 +59,12 @@ export default function ArticlesPage() {
           </Link>
           <div className="flex flex-col items-center gap-4 text-center">
             <h1 className="font-heading text-4xl font-medium text-black md:text-5xl">
-              모든 글
+              {tag ? `"${tag}" 태그` : "모든 글"}
             </h1>
             <p className="max-w-lg font-body text-[15px] leading-relaxed text-gray-600">
-              시장 분석부터 종목 탐구, 투자 전략까지. 모든 글을 한눈에 확인하세요.
+              {tag
+                ? `"${tag}" 태그가 붙은 글 ${articles.length}개`
+                : "시장 분석부터 종목 탐구, 투자 전략까지. 모든 글을 한눈에 확인하세요."}
             </p>
           </div>
         </div>
@@ -51,7 +73,7 @@ export default function ArticlesPage() {
       <div className="divider" />
 
       <section className="container-desktop py-10 md:py-14">
-        <ArticleListContent articles={articles} />
+        <ArticleListContent articles={articles} activeTag={tag} />
       </section>
     </>
   );
