@@ -1,0 +1,104 @@
+[
+  { "id": "d71", "keyword": "밸류체인 뜻", "description": "밸류체인이란 무엇이고, 산업을 분석할 때 왜 밸류체인을 먼저 봐야 하는지", "category": "산업", "used": false },
+  { "id": "d72", "keyword": "산업 내 돈의 흐름", "description": "하나의 산업 안에서 돈이 어디서 발생하고 어디로 흐르는지 구조 이해", "category": "산업", "used": false },
+  { "id": "d73", "keyword": "공급과 수요 산업 구조", "description": "산업 단위에서 공급과 수요가 가격과 실적에 미치는 영향", "category": "산업", "used": false },
+  { "id": "d74", "keyword": "원자재 → 완제품 흐름", "description": "원자재에서 완제품까지 이어지는 산업 구조와 각 단계별 부가가치", "category": "산업", "used": false },
+  { "id": "d75", "keyword": "산업 사이클", "description": "산업별 호황과 불황이 반복되는 구조, 사이클 산업의 특징", "category": "산업", "used": false },
+
+  { "id": "d76", "keyword": "반도체 산업 구조 전체", "description": "반도체 산업의 전체 밸류체인과 핵심 구조", "category": "산업", "used": true },
+  { "id": "d77", "keyword": "메모리 vs 비메모리", "description": "DRAM, NAND 같은 메모리 반도체와 CPU, GPU 같은 비메모리 반도체의 차이", "category": "산업", "used": false },
+  { "id": "d78", "keyword": "팹리스 vs 파운드리", "description": "설계만 하는 팹리스와 제조만 하는 파운드리, IDM의 차이와 대표 기업", "category": "산업", "used": false },
+  { "id": "d79", "keyword": "전공정 vs 후공정", "description": "반도체 제조의 전공정(회로 형성)과 후공정(패키징, 테스트) 차이", "category": "산업", "used": false },
+  { "id": "d80", "keyword": "반도체 장비 산업", "description": "ASML, 도쿄일렉트론 등 반도체 장비 산업의 구조와 투자 포인트", "category": "산업", "used": false },
+
+  { "id": "d81", "keyword": "2차전지 산업 구조", "description": "양극재부터 완성차까지 배터리 산업 밸류체인", "category": "산업", "used": true },
+  { "id": "d82", "keyword": "양극재 / 음극재", "description": "배터리 핵심 소재인 양극재와 음극재의 역할과 시장 구조", "category": "산업", "used": false },
+  { "id": "d83", "keyword": "배터리 셀 구조", "description": "원통형, 각형, 파우치 셀의 차이와 각각의 장단점", "category": "산업", "used": false },
+  { "id": "d84", "keyword": "전기차 밸류체인", "description": "배터리 소재부터 완성차까지 전기차 산업의 전체 흐름", "category": "산업", "used": false },
+  { "id": "d85", "keyword": "리튬 / 니켈 영향", "description": "리튬, 니켈 등 원자재 가격이 배터리 산업에 미치는 영향", "category": "산업", "used": false },
+
+  { "id": "d86", "keyword": "바이오 산업 구조", "description": "바이오/제약 산업의 전체 구조와 수익 모델", "category": "산업", "used": false },
+  { "id": "d87", "keyword": "신약 개발 과정", "description": "후보 물질 발굴부터 허가까지 신약 개발의 전체 과정", "category": "산업", "used": false },
+  { "id": "d88", "keyword": "임상 단계 구조", "description": "전임상, 임상 1상~3상, 허가 심사까지 각 단계별 의미와 리스크", "category": "산업", "used": false },
+  { "id": "d89", "keyword": "바이오 리스크 구조", "description": "바이오 투자에서 임상 실패, 허가 지연 등 고유 리스크", "category": "산업", "used": false },
+
+  { "id": "d90", "keyword": "플랫폼 산업 구조", "description": "IT 플랫폼 기업의 수익 구조와 경쟁 우위 원천", "category": "산업", "used": false },
+  { "id": "d91", "keyword": "네트워크 효과", "description": "사용자가 늘수록 가치가 높아지는 네트워크 효과의 구조와 사례", "category": "산업", "used": false },
+  { "id": "d92", "keyword": "광고 모델", "description": "구글, 메타 등 광고 기반 플랫폼의 수익 구조", "category": "산업", "used": false },
+  { "id": "d93", "keyword": "구독 모델", "description": "넷플릭스, SaaS 등 구독 기반 비즈니스 모델의 핵심 지표", "category": "산업", "used": false },
+
+  { "id": "d94", "keyword": "금융 산업 구조", "description": "은행, 보험, 증권사로 나뉘는 금융 산업의 전체 구조", "category": "산업", "used": false },
+  { "id": "d95", "keyword": "은행 수익 구조 (NIM)", "description": "순이자마진(NIM) 중심의 은행 수익 구조와 금리 영향", "category": "산업", "used": false },
+  { "id": "d96", "keyword": "보험 수익 구조", "description": "보험료 수입, 투자 수익, 손해율 등 보험사 수익 구조", "category": "산업", "used": false },
+  { "id": "d97", "keyword": "증권사 수익 구조", "description": "수수료, 자기매매, IB 등 증권사 수익원 구조", "category": "산업", "used": false },
+
+  { "id": "d98", "keyword": "원자재 산업", "description": "원유, 금속, 농산물 등 원자재 시장의 기본 구조", "category": "산업", "used": false },
+  { "id": "d99", "keyword": "유가 영향", "description": "유가 상승/하락이 산업과 주식시장에 미치는 영향", "category": "산업", "used": false },
+  { "id": "d100", "keyword": "구리와 경기", "description": "구리 가격이 왜 경기 선행 지표로 불리는지", "category": "산업", "used": false },
+
+  { "id": "d101", "keyword": "섹터 로테이션", "description": "경기 국면에 따라 주도 섹터가 바뀌는 섹터 로테이션 구조", "category": "산업", "used": false },
+  { "id": "d102", "keyword": "경기별 산업 흐름", "description": "확장기, 정점, 수축기, 저점에서 각각 유리한 산업", "category": "산업", "used": false },
+
+  { "id": "d121", "keyword": "수급 구조 이해", "description": "주식시장에서 수급이란 무엇이고 왜 중요한지 기본 구조", "category": "수급", "used": false },
+  { "id": "d122", "keyword": "외국인 매매", "description": "외국인 투자자의 매매 패턴과 시장 영향력", "category": "수급", "used": false },
+  { "id": "d123", "keyword": "기관 매매", "description": "기관 투자자의 매매 동향 해석과 의미", "category": "수급", "used": false },
+  { "id": "d124", "keyword": "개인 투자자", "description": "개인 투자자의 매매 특성과 시장에서의 역할", "category": "수급", "used": false },
+  { "id": "d125", "keyword": "프로그램 매매", "description": "프로그램 매매의 구조와 시장 변동성에 미치는 영향", "category": "수급", "used": false },
+
+  { "id": "d126", "keyword": "ETF 자금 흐름 심화", "description": "ETF로 들어오고 나가는 자금 흐름이 개별 종목에 미치는 영향", "category": "수급", "used": false },
+  { "id": "d127", "keyword": "패시브 자금 영향", "description": "인덱스 펀드, ETF 등 패시브 자금이 시장 구조에 미치는 영향", "category": "수급", "used": false },
+
+  { "id": "d128", "keyword": "공매도 개념", "description": "공매도가 무엇이고 왜 존재하는지, 시장에서의 역할", "category": "수급", "used": false },
+  { "id": "d129", "keyword": "숏커버링", "description": "공매도 포지션을 청산하는 숏커버링의 구조와 주가 영향", "category": "수급", "used": false },
+  { "id": "d130", "keyword": "숏스퀴즈", "description": "숏스퀴즈가 발생하는 조건과 주가 급등 메커니즘", "category": "수급", "used": false },
+
+  { "id": "d131", "keyword": "거래량 구조", "description": "거래량의 종류와 의미, 거래량으로 시장 심리를 읽는 법", "category": "수급", "used": false },
+  { "id": "d132", "keyword": "수급과 주가 관계", "description": "수급 데이터와 주가 움직임의 실제 관계와 해석법", "category": "수급", "used": false },
+
+  { "id": "d161", "keyword": "이동평균선", "description": "5일선, 20일선, 60일선, 120일선의 의미와 활용법", "category": "차트", "used": false },
+  { "id": "d162", "keyword": "골든크로스 / 데드크로스", "description": "이동평균선 교차 시그널의 의미와 실전 해석", "category": "차트", "used": false },
+  { "id": "d163", "keyword": "지지선과 저항선", "description": "차트에서 가격이 반복적으로 멈추는 지지/저항 구간의 원리", "category": "차트", "used": false },
+  { "id": "d164", "keyword": "추세 개념", "description": "상승 추세, 하락 추세, 횡보의 구분과 추세선 그리는 법", "category": "차트", "used": false },
+  { "id": "d165", "keyword": "거래량과 추세", "description": "거래량이 추세 확인에 왜 중요한지, 거래량 동반 여부 해석", "category": "차트", "used": false },
+
+  { "id": "d166", "keyword": "캔들 구조", "description": "양봉, 음봉, 꼬리 등 캔들차트의 기본 구조와 의미", "category": "차트", "used": false },
+  { "id": "d167", "keyword": "패턴 분석", "description": "쌍바닥, 헤드앤숄더 등 대표적인 차트 패턴과 해석", "category": "차트", "used": false },
+
+  { "id": "d201", "keyword": "매출 / 영업이익 구조", "description": "매출과 영업이익의 관계, 왜 매출보다 영업이익이 더 중요한지", "category": "기업", "used": false },
+  { "id": "d202", "keyword": "이익률", "description": "영업이익률, 순이익률 등 이익률 지표의 의미와 비교법", "category": "기업", "used": false },
+  { "id": "d203", "keyword": "성장률", "description": "매출 성장률, 이익 성장률의 의미와 투자 판단에서의 활용", "category": "기업", "used": false },
+  { "id": "d204", "keyword": "현금흐름", "description": "영업활동, 투자활동, 재무활동 현금흐름의 의미", "category": "기업", "used": false },
+  { "id": "d205", "keyword": "FCF", "description": "잉여현금흐름(Free Cash Flow)의 의미와 왜 중요한지", "category": "기업", "used": false },
+
+  { "id": "d206", "keyword": "배당 구조", "description": "기업이 배당을 지급하는 구조와 배당 관련 주요 개념", "category": "기업", "used": false },
+  { "id": "d207", "keyword": "배당수익률", "description": "배당수익률의 계산법과 투자 판단에서의 활용", "category": "기업", "used": false },
+  { "id": "d208", "keyword": "배당성향", "description": "배당성향의 의미와 배당수익률과의 차이", "category": "기업", "used": false },
+
+  { "id": "d209", "keyword": "유상증자", "description": "유상증자의 구조와 왜 주가에 부담이 되는지", "category": "기업", "used": false },
+  { "id": "d210", "keyword": "무상증자", "description": "무상증자의 구조와 왜 호재처럼 보이는지", "category": "기업", "used": false },
+
+  { "id": "d251", "keyword": "CPI", "description": "소비자물가지수(CPI)의 의미와 시장에 미치는 영향", "category": "거시", "used": false },
+  { "id": "d252", "keyword": "실업률", "description": "실업률 지표의 의미와 주식시장과의 관계", "category": "거시", "used": false },
+  { "id": "d253", "keyword": "GDP", "description": "국내총생산(GDP)의 의미와 경기 판단에서의 역할", "category": "거시", "used": false },
+  { "id": "d254", "keyword": "통화량", "description": "M1, M2 등 통화량 지표와 유동성이 시장에 미치는 영향", "category": "거시", "used": false },
+  { "id": "d255", "keyword": "중앙은행 정책", "description": "연준, 한은 등 중앙은행의 통화정책이 시장에 미치는 영향", "category": "거시", "used": false },
+
+  { "id": "d256", "keyword": "달러와 주식", "description": "달러 강세/약세가 글로벌 주식시장에 미치는 영향", "category": "거시", "used": false },
+  { "id": "d257", "keyword": "환율 영향", "description": "원달러 환율 변동이 한국 수출주/내수주에 미치는 영향", "category": "거시", "used": false },
+  { "id": "d258", "keyword": "원자재와 인플레이션", "description": "원자재 가격 상승이 인플레이션과 시장에 미치는 영향", "category": "거시", "used": false },
+
+  { "id": "d301", "keyword": "분산 투자", "description": "자산 배분과 종목 분산의 차이, 분산 투자의 실제 효과", "category": "전략", "used": false },
+  { "id": "d302", "keyword": "DCA", "description": "적립식 투자(Dollar Cost Averaging)의 원리와 효과", "category": "전략", "used": false },
+  { "id": "d303", "keyword": "리스크 관리", "description": "투자에서 리스크를 줄이는 기본 원칙과 방법", "category": "전략", "used": false },
+  { "id": "d304", "keyword": "손절 vs 장기투자", "description": "손절과 장기 보유의 판단 기준, 상황별 선택법", "category": "전략", "used": false },
+
+  { "id": "d331", "keyword": "공포와 탐욕", "description": "시장 심리를 나타내는 공포/탐욕 지수와 투자자 심리 구조", "category": "심리", "used": false },
+  { "id": "d332", "keyword": "FOMO", "description": "놓칠까 봐 두려운 심리(FOMO)가 투자 판단에 미치는 영향", "category": "심리", "used": false },
+  { "id": "d333", "keyword": "버블 구조", "description": "자산 버블이 형성되고 붕괴되는 과정과 역사적 사례", "category": "심리", "used": false },
+
+  { "id": "d334", "keyword": "어닝 서프라이즈", "description": "실적이 예상을 넘거나 못 미칠 때 시장 반응 구조", "category": "실전", "used": false },
+  { "id": "d335", "keyword": "뉴스와 주가", "description": "뉴스가 주가에 반영되는 타이밍과 선반영 구조", "category": "실전", "used": false },
+  { "id": "d336", "keyword": "테마주 구조", "description": "테마주가 형성되는 구조와 주의해야 할 점", "category": "실전", "used": false },
+
+  { "id": "d365", "keyword": "시장 종합 해석", "description": "지표, 수급, 차트, 거시경제를 종합해서 시장을 읽는 법", "category": "최종", "used": false }
+]
